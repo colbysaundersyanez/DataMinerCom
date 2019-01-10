@@ -37,6 +37,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element; 
 import org.jsoup.select.Elements;
+import java.awt.Label;
+import java.awt.Menu;
+import java.awt.Insets;
+import java.net.*;
 
 class button implements ActionListener{
    
@@ -58,5 +62,49 @@ class closeButton extends button implements ActionListener{
 }
 
 class getterButton extends button implements ActionListener{
-   public void actionPerformed(ActionEvent e){System.out.println("No function yet");}
+   public void actionPerformed(ActionEvent e){extenderClass.mainExtenderMethod();}
+   public static class extenderClass extends mainWindow{
+      private static JFileChooser chooser;
+      public static void mainExtenderMethod(){
+          try{
+            String url = textBox.getTextBox(showBox);
+            Document document = Jsoup.connect(url).get();
+            Elements links = document.select("a[href]");
+            String ownText = document.body().text();
+            ArrayList list = new ArrayList();
+            list.add(ownText);
+            if(ownText.equals("")){System.out.println();}
+         }
+        catch(IOException | IllegalArgumentException es){System.out.println("IOException @getterButton Class");}
+        try{
+            if (chooser == null) {
+               System.out.println("this code is working");
+               chooser = new JFileChooser();
+               chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+               chooser.setAcceptAllFileFilterUsed(false);
+               if(chooser.showOpenDialog(x) == JFileChooser.APPROVE_OPTION){
+                  BufferedReader br = new BufferedReader(new FileReader(chooser.getSelectedFile()));
+                  System.out.println(br.readLine());
+                  }
+               }
+            else{System.out.println("chooser is not null");}
+            //JFileChooser chooser = new JFileChooser();
+            //if(chooser.showOpenDialog(x) == JFileChooser.APPROVE_OPTION) {System.out.println(chooser);}
+            }
+            catch(IOException exs){System.out.println("not working");}
+
+      }
+   }
+}
+
+class textBoxClear extends button implements ActionListener{
+   public void ActionListener(ActionEvent e){textBoxClearExtenderMethod.clearMethod();}
+   public static class textBoxClearExtenderMethod extends mainWindow{
+      public static void clearMethod(){
+         System.out.println("not working");
+         //showBox.setText(" ");
+         //showBox.setText("");
+         //Not working; bug with java AWT or something that doesn't exist outside of swing. 
+      }
+   }
 }

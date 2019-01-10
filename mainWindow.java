@@ -42,6 +42,7 @@ class mainWindow extends Frame{
    public static JPanel x = new JPanel();
    public static Color backGroundWhite = new Color(250, 249, 250);
    public static Color mainInfoDisplay = new Color(255,255,255);
+   public static textBox showBox = new textBox();
    public mainWindow(){
       super("DataMiner");
       setSize(300,300);
@@ -78,6 +79,8 @@ class mainWindow extends Frame{
    
    public static void main(String[] args){
       mainWindow window = new mainWindow();
+      if(Desktop.isDesktopSupported()){System.out.println("desktop is supported");}
+      else{System.out.println("Desktop is not supported");}
       accessoryLayoutClass.mainMethod();
    }
 }
@@ -90,5 +93,6 @@ class accessoryLayoutClass extends mainWindow{
       checkOne.checkBoxCreator(x,"URL link",180,10,70,20);
       getterButton b2 = new getterButton();
       b2.buttonCreator(x,145,230,65,25,"Find Data");
+      showBox.textBoxCreator(x,160,187,120,25);
    }
 }

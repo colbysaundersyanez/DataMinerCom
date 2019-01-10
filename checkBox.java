@@ -55,15 +55,21 @@ class URLUser extends checkBox implements ItemListener{
    public void itemStateChanged(ItemEvent e){extenderURL.mainExtenderURLMethod();}
    public static class extenderURL extends mainWindow{
       public static void mainExtenderURLMethod(){
-         Font font = new Font("Serif" , Font.BOLD, 9);
+         Font font = new Font("Serif" , Font.BOLD, 10);
          System.out.println("checkBox works");
-         Label desc = new Label("Enter the URL in the box provided");
+         Label desc = new Label("Enter the URL in the box");
          Label desc2 = new Label("Meta Data will be provided");
-         Label desc3 = new Label("other data + Meta Data stored in files");
-         desc.setBounds(25,50,100,50);
-         desc.setFont(font);
-         desc.setBackground(Color.white);
-         x.add(desc);
+         Label desc3 = new Label("Data will be stored in file");
+         shortMethod(desc,20,5,130,15,font,x);
+         shortMethod(desc2,20,20,130,15,font,x);
+         shortMethod(desc3,20,35,130,15,font,x);
+      }
+      public static JPanel shortMethod(Label t, int a, int b , int c, int d, Font font, JPanel x){
+         t.setBounds(a,b,c,d);
+         t.setFont(font);
+         t.setBackground(Color.white);
+         x.add(t);
+         return x;
       }
    }
 }
