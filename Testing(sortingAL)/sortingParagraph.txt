@@ -1,0 +1,1 @@
+testing I'm not able to find any good web scraping Java based API. The site which I need to scrape does not provide any API as well; I want to iterate over all web pages using some pageID and extract the HTML titles / other stuff in their DOM trees.
