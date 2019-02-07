@@ -138,16 +138,26 @@ class socialMedia extends checkBox implements ItemListener{
 }
 
 class randomSearch extends checkBox implements ItemListener{
+   public static Label randomLabelOne = new Label("creates random URLS");
+   public static Label randomLabelTwo = new Label("and searches for html");
+   public static Label randomLabelThree = new Label("data.");
+   public static Font font = new Font("Serif" , Font.BOLD, 10);
    public void itemStateChanged(ItemEvent es){randomSearchExtenderClass.randomSearchExtenderClassMethod();}
    static class randomSearchExtenderClass extends mainWindow{
       public static void randomSearchExtenderClassMethod(){
          if(booleanChecker.size() == 0){
             booleanChecker.add(5);
             System.out.println("checkBox works; Rand Search.");
+            labelMakerClass.labelMakerClassMethod(randomLabelOne,20,5,130,15,font,x);
+            labelMakerClass.labelMakerClassMethod(randomLabelTwo,20,20,130,15,font,x);
+            labelMakerClass.labelMakerClassMethod(randomLabelThree,20,35,130,15,font,x);
          }
          else{
              booleanChecker.clear();
              System.out.println("booleanChecker cleared" + booleanChecker.size());
+             labelMakerClass.labelRemover(randomLabelOne, x);
+             labelMakerClass.labelRemover(randomLabelTwo, x);
+             labelMakerClass.labelRemover(randomLabelThree, x);
          }
       }
    }

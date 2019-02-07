@@ -12,8 +12,8 @@ s#i0
 s#k0
 s#j0
 s#l0
-!82;u
-a0	b68	c255	f%\011DataMinerCom.jar	g%\011DataMinerCom.zip	hManifest-Version\0111.0!109;g
+!110;u
+a0	b68	c255	f%\011DataMinerCom.jar	g%\011DataMinerCom.zip	hManifest-Version\0111.0\011Main-Class\011mainWindow!109;g
 %\011JSoup%s
 %\011button.java
 %\011mainWindow.java

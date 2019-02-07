@@ -45,42 +45,53 @@ import java.util.Scanner;
 
 class URLTesting extends mainWindow{
    public static ArrayList stuff = new ArrayList();
-   public static void mainMethodStart(){
+   public static void mainMethodStart(int a, int b, int c){
       ArrayList t = new ArrayList();
       ArrayList tTwo = new ArrayList();
       Random rand = new Random();
       t.add(0);
       for(int i = 0; t.get(0).equals(i); i++){
-         System.out.println(randomLetterMethod(10, 1, 10));
+         randomLetterMethod(a, b ,c); //used to be 10, 1 ,10
          char e = (char)(rand.nextInt(26) + 'a');
-         System.out.println(e);
+         //System.out.println(e);
          for(int listGetter = 0; listGetter < stuff.size(); listGetter++){
             int x = listGetter;
             StringBuilder tr = new StringBuilder("");
             tr.append(stuff.get(x).toString());
-            //String trTest = stuff.get(x).toString();
-            System.out.println(tr.toString());
-            //tr.toString();
-            //System.out.println(tr);
             tTwo.add(tr);
          }
          mainMethod(tTwo.toString().replace("[","").replace("]","").replace(",","").replace(" ", ""));
          tTwo.clear();
-         System.out.println("tTwo:" + tTwo);
+         //System.out.println("tTwo:" + tTwo);
       }
    }
    public static void mainMethod(String domain){
       try{
          URL url = new URL("http", domain, ".com/");
          String output = url.toExternalForm();
-         System.out.println(output);
+         //System.out.println(output);
          URLString.add(output);
          System.out.println("URLString is " + URLString);
+         URLReader(output);
+         URLString.clear();
          }
       catch(MalformedURLException e){System.out.println("not working");}
    }
    
+   public static void URLReader(String URL){
+      try{
+         Document documentTwo = Jsoup.connect(URL).get();
+         Elements linksTwo = documentTwo.select("a[href]");
+         String ownTextTwo = documentTwo.body().text();
+         System.out.println(ownTextTwo);
+         }
+      catch(IOException | NullPointerException eTwo){
+         System.out.println("IOEXCEPTION @URLREADER");
+      }
+   }
+   
    public static ArrayList randomLetterMethod(int a, int b, int c){
+      stuff.clear();
       Random randTwo = new Random();
       for(int i = 0; i<=c;i++){
          char randChar = (char)(randTwo.nextInt(a) + 'a');
@@ -91,3 +102,11 @@ class URLTesting extends mainWindow{
       
    }
 }
+
+
+
+
+            //String trTest = stuff.get(x).toString();
+            //System.out.println(tr.toString());
+            //tr.toString();
+            //System.out.println(tr);

@@ -82,12 +82,11 @@ class getterButton extends button implements ActionListener{
                Runtime run = Runtime.getRuntime();
                Process proc = run.exec("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
                Robot bot = new Robot();
-               //bot.delay(5000);
-               Thread.sleep(250);
+               bot.delay(500);
                botKeyPressMethod(bot, find);
                //bot.keyRealease(finder);
                }
-            catch(IOException | AWTException | InterruptedException exse){
+            catch(IOException | AWTException exse){
                System.out.println("IOEXCEPTION @ MAINEXTENDERMETHOD");
                exse.printStackTrace();
                }
@@ -110,17 +109,12 @@ class getterButton extends button implements ActionListener{
             System.out.println(character);
             typeCharacter(bot, character);
          }
-         try{
-            Thread.sleep(25);
-            //int mouseClick = InputEvent.BUTTON1_DOWN_MASK;
-            bot.keyPress(KeyEvent.VK_ENTER);
-            //bot.mouseMove(300,430);
-            //bot.mousePress(mouseClick);
-            //bot.mouseRelease(mouseClick);
-         }
-         catch(InterruptedException e){
-            System.out.println("IE @ BOTKEYPRESSMETHOD");
-         }
+         int mouseClick = InputEvent.BUTTON1_DOWN_MASK;
+         bot.keyPress(KeyEvent.VK_ENTER);
+         
+         bot.mouseMove(300,430);
+         bot.mousePress(mouseClick);
+         bot.mouseRelease(mouseClick);
       }
       
       public static void typeCharacter(Robot bot, char character) {
@@ -257,7 +251,10 @@ class getterButton extends button implements ActionListener{
           System.out.println("IOException @getterButton Class");
           JOptionPane.showMessageDialog(null, "No URL/IOException", "Not Recognized",JOptionPane.ERROR_MESSAGE);
           }
-         else{System.out.println("link not working");}
+         else{
+            System.out.println("link not working");
+            System.out.println(" ");
+         }
         }
       }
       
@@ -284,7 +281,16 @@ class getterButton extends button implements ActionListener{
    }
 }
 class extenderClassURL extends URLTesting{
-   public static void extenderClassMethodURL(){mainMethodStart();}
+   public static void extenderClassMethodURL(){
+      String size = JOptionPane.showInputDialog("type in the size of URL you want");
+      int sizeInt = Integer.parseInt(size);
+      String executionSize = JOptionPane.showInputDialog("how many times should I execute?");
+      int executionSizeInt = Integer.parseInt(executionSize);
+      int timesExecuted = executionSizeInt;
+      for(int i = 0; i <= timesExecuted; i++){
+         mainMethodStart(10,1,sizeInt);
+      }
+   }
 }
 class textBoxClear extends button implements ActionListener{
    public void ActionListener(ActionEvent e){textBoxClearExtenderMethod.clearMethod();}
