@@ -47,6 +47,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import static java.awt.event.KeyEvent.*;
+import java.awt.event.KeyListener;
 
 //https://stackoverflow.com/questions/1248510/convert-string-to-keyevents
 
@@ -287,8 +288,11 @@ class extenderClassURL extends URLTesting{
       String executionSize = JOptionPane.showInputDialog("how many times should I execute?");
       int executionSizeInt = Integer.parseInt(executionSize);
       int timesExecuted = executionSizeInt;
-      for(int i = 0; i <= timesExecuted; i++){
-         mainMethodStart(10,1,sizeInt);
+      escapeChecker.clear();
+      while(escapeChecker.size() == 0){
+         for(int i = 0; i <= timesExecuted; i++){
+            mainMethodStart(10,1,sizeInt);
+         }
       }
    }
 }

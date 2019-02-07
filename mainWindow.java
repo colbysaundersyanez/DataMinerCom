@@ -82,6 +82,8 @@ class mainWindow extends Frame{
    public static ArrayList booleanChecker = new ArrayList();
    public static Color backGroundWhite = new Color(250, 249, 250);
    public static Color mainInfoDisplay = new Color(255,255,255);
+   public static ArrayList numberExecuted = new ArrayList();
+   public static ArrayList escapeChecker = new ArrayList();
    public static textBox showBox = new textBox();
    public mainWindow(){
       super("DataMiner");
@@ -99,6 +101,15 @@ class mainWindow extends Frame{
             System.exit(0);
          }        
       }); 
+      addKeyListener(new KeyAdapter(){
+         public void keyPressed(KeyEvent e){
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_ESCAPE){
+               escapeChecker.add(1);
+               System.out.println("escape key pressed");
+            }
+         }
+      });
    }
    
    public void paint(Graphics g) {

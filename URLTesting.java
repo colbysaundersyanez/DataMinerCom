@@ -43,7 +43,11 @@ import java.awt.Insets;
 import java.net.*;
 import java.util.Scanner;
 
+//https://stackoverflow.com/questions/23045956/icons-on-joptionpane
+
 class URLTesting extends mainWindow{
+   public static Color backGroundWhite = new Color(250, 249, 250);
+   public static Font font = new Font("Serif" , Font.BOLD, 10);
    public static ArrayList stuff = new ArrayList();
    public static void mainMethodStart(int a, int b, int c){
       ArrayList t = new ArrayList();
@@ -80,15 +84,45 @@ class URLTesting extends mainWindow{
    
    public static void URLReader(String URL){
       try{
+         numberExecuted.add(1);
          Document documentTwo = Jsoup.connect(URL).get();
          Elements linksTwo = documentTwo.select("a[href]");
          String ownTextTwo = documentTwo.body().text();
          System.out.println(ownTextTwo);
+         int t = numberExecuted.size();
+         String tTwo = String.valueOf(t);
+         System.out.println(tTwo);
+         Label xLabel = new Label(tTwo);
+         xLabel.setBounds(50,50,130,15);
+         xLabel.setBackground(Color.white);
+         xLabel.setFont(font);
+         x.add(xLabel);
+         JOptionPane.showMessageDialog(null, "Found html data continue?", "HTMLDATAFOUND",JOptionPane.ERROR_MESSAGE);
+         BufferedWriter writer = new BufferedWriter(new FileWriter("testing.txt"));
+         writer.write(ownTextTwo);
+         writer.close();
+         x.remove(xLabel);
          }
       catch(IOException | NullPointerException eTwo){
-         System.out.println("IOEXCEPTION @URLREADER");
+         try{
+            System.out.println("IOEXCEPTION @URLREADER");
+            numberExecuted.add(1);
+            int t = numberExecuted.size();
+            String tTwo = String.valueOf(t);
+            Label xLabel = new Label("times executed: " + tTwo);
+            xLabel.setBounds(180,160,130,15);
+            xLabel.setBackground(backGroundWhite);
+            xLabel.setFont(font);
+            x.add(xLabel);
+            Thread.sleep(100);
+            x.remove(xLabel);
+         }
+         catch(InterruptedException e){
+            System.out.println("InterruptedException @CATCH URLREADER");
+         }
       }
    }
+   
    
    public static ArrayList randomLetterMethod(int a, int b, int c){
       stuff.clear();
