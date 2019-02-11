@@ -100,6 +100,28 @@ class getterButton extends button implements ActionListener{
             mainExtenderClassMethodM(URLString.toString());
             URLString.clear();
             }
+          if(booleanChecker.get(0).equals(6)){
+            try{
+               String urlSale = JOptionPane.showInputDialog("Input webpage for sale (read websitesupport.txt)");
+               URLTesting.URLReader(urlSale);
+               String testSale = "Eligible order ship free";
+               String testSaleTwo = "Sold";
+               BufferedReader brSale = new BufferedReader(new FileReader("testing.txt"));
+               String st;
+               while((st = brSale.readLine()) != null){
+               ArrayList testSaleCounter = new ArrayList();
+               testSaleCounter.add(st.indexOf(testSaleTwo));
+                  while(testSaleCounter.get(0) != 0){
+                     //find way to remove from the testSaleCounter.get(0)
+                     //testSaleCounter.get(0)
+                     String saleFinderFinalText = st.substring(st.lastIndexOf(testSale) + 1, st.indexOf(testSaleTwo));
+                     //System.out.println("this is testSaleTwo" + st.indexOf(testSaleTwo));
+                     //System.out.println("this is the final text" + saleFinderFinalText);
+                  }
+               }
+            }
+            catch(IOException saleFinderException){System.out.println("IOException @booleanChecker 6 button");}       
+          }
          else if(booleanChecker.get(0).equals(0)){System.out.println("nothing is selected"); System.out.println(booleanChecker.get(0));}
          }
          
@@ -289,10 +311,8 @@ class extenderClassURL extends URLTesting{
       int executionSizeInt = Integer.parseInt(executionSize);
       int timesExecuted = executionSizeInt;
       escapeChecker.clear();
-      while(escapeChecker.size() == 0){
-         for(int i = 0; i <= timesExecuted; i++){
-            mainMethodStart(10,1,sizeInt);
-         }
+      for(int i = 0; i <= timesExecuted; i++){
+         mainMethodStart(10,1,sizeInt);
       }
    }
 }
@@ -333,3 +353,6 @@ class textBoxClear extends button implements ActionListener{
             
             //JOptionPane.showMessageDialog(null, "Button Has No Function", "No Function",JOptionPane.ERROR_MESSAGE);
             //if(booleanChecker.get(0).equals(5)){JOptionPane.showInputDialog(null, "This is the message", "This is the default text");}
+            
+            
+            

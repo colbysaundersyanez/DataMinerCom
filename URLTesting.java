@@ -88,7 +88,7 @@ class URLTesting extends mainWindow{
          Document documentTwo = Jsoup.connect(URL).get();
          Elements linksTwo = documentTwo.select("a[href]");
          String ownTextTwo = documentTwo.body().text();
-         System.out.println(ownTextTwo);
+         System.out.println("this is ownTextTwo" + ownTextTwo);
          int t = numberExecuted.size();
          String tTwo = String.valueOf(t);
          System.out.println(tTwo);

@@ -93,6 +93,18 @@ class URLUser extends checkBox implements ItemListener{
    }
 }
 
+class saleFinder extends checkBox implements ItemListener{
+   public void itemStateChanged(ItemEvent e){saleFinderClass.saleFinderClassMethod();}
+   static class saleFinderClass extends mainWindow{
+      public static void saleFinderClassMethod(){
+         if(booleanChecker.size() == 0){
+            booleanChecker.add(6);   
+         }
+         else{booleanChecker.clear();}
+      }  
+   }
+}
+
 class fileChooser extends checkBox implements ItemListener{
    public void itemStateChanged(ItemEvent e){fileChooserExtender.fileChooserExtenderMethod();}
    static class fileChooserExtender extends mainWindow{

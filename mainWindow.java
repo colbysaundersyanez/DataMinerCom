@@ -74,6 +74,12 @@ import org.jsoup.select.Elements;
 //for both it would bookshelf the data in a manner that i can go back and choose a certain category for further
 //study and potential demographics that could yield monetary gain in trends and statistics.
 
+// Eligible orders ship free Favorite Add to Personalized Rustic Sign Family Name Sign State Shape Sign 16x20 Sold
+//this is the format of the sold items
+//https://www.etsy.com/shop/mrcwoodproducts/sold
+//have AI open webpage physically open the previous url search for the next page button and gather the url
+//and repeat until theres no more sale pages.
+
 
 class mainWindow extends Frame{
    public static JFileChooser chooser;
@@ -152,5 +158,7 @@ class accessoryLayoutClass extends mainWindow{
       socialMediaCheck.checkBoxCreator(x,"Social Media", 180,50,90,20);
       randomSearch randomSearchCheck = new randomSearch();
       randomSearchCheck.checkBoxCreator(x,"Rand Search" , 180,70,100,20);
+      saleFinder saleFinderCheck = new saleFinder();
+      saleFinderCheck.checkBoxCreator(x,"Sale Finder" , 180,90,100,20);
    }
 }
