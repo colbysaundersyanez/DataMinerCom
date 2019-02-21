@@ -123,42 +123,65 @@ class getterButton extends button implements ActionListener{
                      //String testing = "this is a test";
                      //System.out.println(testing);
                      //System.out.println(saleFinderFinalText);
+                     int numberInput;
                      String numberInputString = JOptionPane.showInputDialog("Enter number of products");
-                     int numberInput = Integer.parseInt(numberInputString);
-                     for(int i = 0; i < numberInput; i++){
-                        String saleFinderFinalText = st.substring(st.lastIndexOf(testSale) + 1, st.indexOf(testSaleTwo));
+                     if(numberInputString.equals("max")){numberInput = 5000;}
+                     else{numberInput = Integer.parseInt(numberInputString);}
+                     int addedIndex = 0;
+                     System.out.println("number of loops: " + numberInput);
+                     st = st.replace("Close Beginning of a dialog window, including tabbed navigation to register an account or sign in to an existing account. Both registration and sign in support using google and facebook accounts. Escape will close this window." , "").replace(" Register Sign in Get started Continue with Facebook Continue with Google We'll never post without your permission.","").replace(" OR Email or Username Have an account? Sign in Just one more","").replace(" already have an Etsy account. Sign in with Facebook Sign in with Google OR Email or Username Password Stay signed in Forgot your password? Forgot your username or email? Reopen your account? Etsy Browse Browse Search for items or shops Search Skip to Content Sell on Etsy Sell Register Sign in Discover Cart Cart 0 Jewelry & Accessories Clothing & Shoes Home & Living Wedding & Party Toys & Entertainment Art & Collectibles Craft Supplies Vintage Gifts Take full advantage of our site features by enabling JavaScript.","[Ignore any previous undeditable html]").replace("Create your Etsy password Create Your Etsy Account Continue with Facebook Continue with Google We'll never post without your permission. OR First Name Email Password Confirm Password By clicking Register, you agree to Etsy's Terms of Use and Privacy Policy. Etsy may send you communications; you may change your preferences in your account settings. Uh oh! You need to have cookies enabled to sign in. Welcome back","").replace("stepà","[stepa was replaced]");
+                     String finalText = st;
+                     int numberOfStrings = finalText.length();
+                     for(int i = 0; i < numberOfStrings; i++){
+                        try{
+                           int indexer = i*96;
+                           int indexerTwo = finalText.indexOf("Eligible", finalText.indexOf("Eligible") + indexer);
+                           String testing = finalText.substring(indexerTwo) + finalText.indexOf("Sold");
+                           System.out.println(indexer);
+                           String t = testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4); 
+                           System.out.println(t.substring(t.indexOf("to") + 2));
+                           //System.out.println(t.replace(t.substring(45), ""));
+                        }         
+                        catch(StringIndexOutOfBoundsException e){System.out.println("string ended"); break;}
+                     }
+                     //for(int i = 0; i < numberInput; i++){
+                        //String saleFinderFinalText = st.substring(st.lastIndexOf(testSale) + 1, st.indexOf(testSaleTwo));
                         //String saleFinderFinalText = st.indexOf(testSale, saleFinderFinalText.indexOf(testSale) + i);
-                        saleFinderFinalText = saleFinderFinalText.replace("Close Beginning of a dialog window, including tabbed navigation to register an account or sign in to an existing account. Both registration and sign in support using google and facebook accounts. Escape will close this window." , "").replace(" Register Sign in Get started Continue with Facebook Continue with Google We'll never post without your permission.","").replace(" OR Email or Username Have an account? Sign in Just one more","").replace(" already have an Etsy account. Sign in with Facebook Sign in with Google OR Email or Username Password Stay signed in Forgot your password? Forgot your username or email? Reopen your account? Etsy Browse Browse Search for items or shops Search Skip to Content Sell on Etsy Sell Register Sign in Discover Cart Cart 0 Jewelry & Accessories Clothing & Shoes Home & Living Wedding & Party Toys & Entertainment Art & Collectibles Craft Supplies Vintage Gifts Take full advantage of our site features by enabling JavaScript.","[Ignore any previous undeditable html]").replace("Create your Etsy password Create Your Etsy Account Continue with Facebook Continue with Google We'll never post without your permission. OR First Name Email Password Confirm Password By clicking Register, you agree to Etsy's Terms of Use and Privacy Policy. Etsy may send you communications; you may change your preferences in your account settings. Uh oh! You need to have cookies enabled to sign in. Welcome back","").replace("stepà","[stepa was replaced]");
-                        int testing = saleFinderFinalText.indexOf(testSale, saleFinderFinalText.indexOf(testSale) + 1);
-                        String testingTwo = st.substring(st.indexOf(testSaleTwo) + 1);
-                        int first = st.indexOf("Sold") + i;
-                        System.out.println(first);
-                        System.out.println(findingIndexOfSold(st,"Sold",first));
-                        //int second = st.indexOf("Sold", first + 1);
-                        //int third = st.indexOf("Sold", second + 1);
-                        //System.out.println("this is the firstSubString: " + st.substring(first));
-                        //System.out.println("this is the substringTwo: " + st.substring(second));
-                        //System.out.println("this is the third substring: " + st.substring(third));
-                        //System.out.println("this is testingOne: " + st.indexOf("Sold", st.indexOf("Sold") + i));
-                        //System.out.println(st.indexOf(testSaleTwo));
-                        //System.out.println("this is testing: " + testingTwo);
-
-                        //System.out.println("this is the lenght" + saleFinderFinalText.length());
-                        //System.out.println(saleFinderFinalText.substring(saleFinderFinalText.indexOf("Learn"),saleFinderFinalText.length()));
-                     }  
-                     //System.out.println("this is testSaleTwo" + st.indexOf(testSaleTwo));
-                     //System.out.println("this is the final text" + saleFinderFinalText);
-                 // }
+                        //int iPlus = numberOfStrings*i;
+                        
+                        
+                        
+                        
+                        
+                        //int testing = saleFinderFinalText.indexOf(testSale, saleFinderFinalText.indexOf(testSale) + 1);
+                        //String testingTwo = st.substring(st.indexOf(testSaleTwo) + 1);
+                        //int first = st.indexOf("Sold") + iPlus;
+                        //System.out.println(first);
+                        //System.out.println("this is the final text" + finalTextTest);
+                        //String finalText = findingIndexOfSold(st,"Sold",iPlus);
+                        //if(finalText.equals("No more Product")){break;}
+                        //else{System.out.println(finalText);}
+                     //}
+                     System.out.println("Loop ended");  
                }
             }
             catch(IOException saleFinderException){System.out.println("IOException @booleanChecker 6 button");}       
           }
          else if(booleanChecker.get(0).equals(0)){System.out.println("nothing is selected"); System.out.println(booleanChecker.get(0));}
          }
-         
+      public static String findingIndexChoosing(String string, String findingString, int indexNumber){
+         string.split(findingString, indexNumber);
+         string.join(findingString);
+         return string;
+      }
+        
       public static String findingIndexOfSold(String fullString, String wordIndexing, int firstIndex){
-         int secondIndex = fullString.indexOf(wordIndexing, firstIndex + 1);
-         return fullString.substring(secondIndex);
+         try{
+            int secondIndex = fullString.indexOf(wordIndexing, firstIndex + 1);
+            return fullString.substring(secondIndex);
+            }
+         catch(StringIndexOutOfBoundsException e){System.out.println();}
+         return "No more Product";
       }
       
       public static void botKeyPressMethod(Robot bot, CharSequence text){        
@@ -389,6 +412,19 @@ class textBoxClear extends button implements ActionListener{
             
             //JOptionPane.showMessageDialog(null, "Button Has No Function", "No Function",JOptionPane.ERROR_MESSAGE);
             //if(booleanChecker.get(0).equals(5)){JOptionPane.showInputDialog(null, "This is the message", "This is the default text");}
-            
+                                 //System.out.println("this is testSaleTwo" + st.indexOf(testSaleTwo));
+                     //System.out.println("this is the final text" + saleFinderFinalText);
+                 // }
+                                         //int second = st.indexOf("Sold", first + 1);
+                        //int third = st.indexOf("Sold", second + 1);
+                        //System.out.println("this is the firstSubString: " + st.substring(first));
+                        //System.out.println("this is the substringTwo: " + st.substring(second));
+                        //System.out.println("this is the third substring: " + st.substring(third));
+                        //System.out.println("this is testingOne: " + st.indexOf("Sold", st.indexOf("Sold") + i));
+                        //System.out.println(st.indexOf(testSaleTwo));
+                        //System.out.println("this is testing: " + testingTwo);
+
+                        //System.out.println("this is the lenght" + saleFinderFinalText.length());
+                        //System.out.println(saleFinderFinalText.substring(saleFinderFinalText.indexOf("Learn"),saleFinderFinalText.length()));
             
             
