@@ -48,6 +48,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import static java.awt.event.KeyEvent.*;
 import java.awt.event.KeyListener;
+import java.io.File;
 
 //https://stackoverflow.com/questions/1248510/convert-string-to-keyevents
 //https://stackoverflow.com/questions/19035893/finding-second-occurrence-of-a-substring-in-a-string-in-java/35155037
@@ -113,62 +114,73 @@ class getterButton extends button implements ActionListener{
                ArrayList testSaleCounter = new ArrayList();
                testSaleCounter.add(st.indexOf(testSaleTwo));
                //https://www.etsy.com/shop/mrcwoodproducts/sold
-                  //while((int)testSaleCounter.get(0) != 0){
-                     //find way to remove from the testSaleCounter.get(0)
-                     //testSaleCounter.get(0)
+               //https://www.etsy.com/shop/WhoKnowsWhat/sold
                      int subtract = (int)testSaleCounter.get(0) - 1;
                      testSaleCounter.set(0,subtract);
-                     //String saleFinderFinalText = st.substring(st.lastIndexOf(testSale) + 1, st.indexOf(testSaleTwo));
-                     //saleFinderFinalText = saleFinderFinalText.replace("Close", "[closewasreplace]");
-                     //String testing = "this is a test";
-                     //System.out.println(testing);
-                     //System.out.println(saleFinderFinalText);
                      int numberInput;
-                     String numberInputString = JOptionPane.showInputDialog("Enter number of products");
-                     if(numberInputString.equals("max")){numberInput = 5000;}
-                     else{numberInput = Integer.parseInt(numberInputString);}
                      int addedIndex = 0;
-                     System.out.println("number of loops: " + numberInput);
+                     //System.out.println("number of loops: " + numberInput);
                      st = st.replace("Close Beginning of a dialog window, including tabbed navigation to register an account or sign in to an existing account. Both registration and sign in support using google and facebook accounts. Escape will close this window." , "").replace(" Register Sign in Get started Continue with Facebook Continue with Google We'll never post without your permission.","").replace(" OR Email or Username Have an account? Sign in Just one more","").replace(" already have an Etsy account. Sign in with Facebook Sign in with Google OR Email or Username Password Stay signed in Forgot your password? Forgot your username or email? Reopen your account? Etsy Browse Browse Search for items or shops Search Skip to Content Sell on Etsy Sell Register Sign in Discover Cart Cart 0 Jewelry & Accessories Clothing & Shoes Home & Living Wedding & Party Toys & Entertainment Art & Collectibles Craft Supplies Vintage Gifts Take full advantage of our site features by enabling JavaScript.","[Ignore any previous undeditable html]").replace("Create your Etsy password Create Your Etsy Account Continue with Facebook Continue with Google We'll never post without your permission. OR First Name Email Password Confirm Password By clicking Register, you agree to Etsy's Terms of Use and Privacy Policy. Etsy may send you communications; you may change your preferences in your account settings. Uh oh! You need to have cookies enabled to sign in. Welcome back","").replace("stepà","[stepa was replaced]");
-                     String finalText = st;
+                     System.out.println(st);
+                     //String te = " stepà  Niceùyou[Ignore any previous undeditable html] Learn more mrcwoodproducts mrcwoodproducts 89998 Sales Pittsboro, Indiana Pittsboro, Indiana 5 out of 5 stars (15807) ";
+                     //System.out.println("this is the length: " + te.length());
+                     //
+                     //NOTE TO SELF: change so this isn't reliant on updating a .txt it is screwing up different links
+                     String finalText = st.replace(st.substring(0,st.indexOf("Sold") + 4), "");;
+                     System.out.println(finalText);
+                     System.out.println(st.substring(173,st.indexOf("Sold")));
                      int numberOfStrings = finalText.length();
+                     ArrayList indexerNumber = new ArrayList();
                      for(int i = 0; i < numberOfStrings; i++){
                         try{
-                           int indexer = i*96;
+                           System.out.println("this is the last index of sold" + st.lastIndexOf("Sold"));
+                           int indexer = getLength(finalText);
+                           System.out.println(indexer);
                            int indexerTwo = finalText.indexOf("Eligible", finalText.indexOf("Eligible") + indexer);
                            String testing = finalText.substring(indexerTwo) + finalText.indexOf("Sold");
-                           System.out.println(indexer);
+                           //System.out.println(indexer);
                            String t = testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4); 
                            System.out.println(t.substring(t.indexOf("to") + 2));
+                           //System.out.println(testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4));
                            //System.out.println(t.replace(t.substring(45), ""));
+                           finalText = finalText.replace(finalText.substring(0,indexer + 1), ""); //this might be why the indexer is only printing out 17 instead of the 24 becuase the sold is being canceled out by the one
+                           indexerNumber.add(indexer);
                         }         
-                        catch(StringIndexOutOfBoundsException e){System.out.println("string ended"); break;}
+                        catch(StringIndexOutOfBoundsException e){
+                              System.out.println("string ended"); 
+                              break;
+                           }
                      }
-                     //for(int i = 0; i < numberInput; i++){
-                        //String saleFinderFinalText = st.substring(st.lastIndexOf(testSale) + 1, st.indexOf(testSaleTwo));
-                        //String saleFinderFinalText = st.indexOf(testSale, saleFinderFinalText.indexOf(testSale) + i);
-                        //int iPlus = numberOfStrings*i;
-                        
-                        
-                        
-                        
-                        
-                        //int testing = saleFinderFinalText.indexOf(testSale, saleFinderFinalText.indexOf(testSale) + 1);
-                        //String testingTwo = st.substring(st.indexOf(testSaleTwo) + 1);
-                        //int first = st.indexOf("Sold") + iPlus;
-                        //System.out.println(first);
-                        //System.out.println("this is the final text" + finalTextTest);
-                        //String finalText = findingIndexOfSold(st,"Sold",iPlus);
-                        //if(finalText.equals("No more Product")){break;}
-                        //else{System.out.println(finalText);}
-                     //}
-                     System.out.println("Loop ended");  
+                     System.out.println("Loop ended");
+                     System.out.println("this is indexerNumber: " + indexerNumber);
+                     int sum = 0;
+                     for(int i = 0; i<indexerNumber.size(); i++){
+                        int tTwo = (int)indexerNumber.get(i);
+                        sum += tTwo;
+                     }
+                     System.out.println("this is the sum: " + sum);
+                     if(sum != st.lastIndexOf("Sold")){
+                        JOptionPane.showMessageDialog(null, "Missing " + (st.lastIndexOf("Sold") - sum) + " Indexes", "MissingIndexes",JOptionPane.ERROR_MESSAGE);
+                     }
+                     System.out.println(st.substring(1722,2950));
+                     PrintWriter writer = new PrintWriter("testing.txt");
+                     writer.print("");
+                     writer.close();  
                }
             }
             catch(IOException saleFinderException){System.out.println("IOException @booleanChecker 6 button");}       
           }
          else if(booleanChecker.get(0).equals(0)){System.out.println("nothing is selected"); System.out.println(booleanChecker.get(0));}
          }
+         
+      public static int getLength(String text){
+         int indexOne = text.indexOf("Eligible");
+         int indexTwo = text.indexOf("Sold");
+         String indexText = text.substring(indexOne, indexTwo);
+         int lengthOf = indexText.length();
+         return lengthOf + 4;
+      }
+      
       public static String findingIndexChoosing(String string, String findingString, int indexNumber){
          string.split(findingString, indexNumber);
          string.join(findingString);
@@ -427,4 +439,39 @@ class textBoxClear extends button implements ActionListener{
                         //System.out.println("this is the lenght" + saleFinderFinalText.length());
                         //System.out.println(saleFinderFinalText.substring(saleFinderFinalText.indexOf("Learn"),saleFinderFinalText.length()));
             
-            
+                     //for(int i = 0; i < numberInput; i++){
+                        //String saleFinderFinalText = st.substring(st.lastIndexOf(testSale) + 1, st.indexOf(testSaleTwo));
+                        //String saleFinderFinalText = st.indexOf(testSale, saleFinderFinalText.indexOf(testSale) + i);
+                        //int iPlus = numberOfStrings*i;
+                        
+                        
+                        
+                        
+                        
+                        //int testing = saleFinderFinalText.indexOf(testSale, saleFinderFinalText.indexOf(testSale) + 1);
+                        //String testingTwo = st.substring(st.indexOf(testSaleTwo) + 1);
+                        //int first = st.indexOf("Sold") + iPlus;
+                        //System.out.println(first);
+                        //System.out.println("this is the final text" + finalTextTest);
+                        //String finalText = findingIndexOfSold(st,"Sold",iPlus);
+                        //if(finalText.equals("No more Product")){break;}
+                        //else{System.out.println(finalText);}
+                     //}            
+                     
+                     
+                     
+                     
+                                       //while((int)testSaleCounter.get(0) != 0){
+                     //find way to remove from the testSaleCounter.get(0)
+                     //testSaleCounter.get(0)
+                     
+                                      //String saleFinderFinalText = st.substring(st.lastIndexOf(testSale) + 1, st.indexOf(testSaleTwo));
+                     //saleFinderFinalText = saleFinderFinalText.replace("Close", "[closewasreplace]");
+                     //String testing = "this is a test";
+                     //System.out.println(testing);
+                     //System.out.println(saleFinderFinalText);
+                     //String numberInputString = JOptionPane.showInputDialog("Enter number of products");
+                     //if(numberInputString.equals("max")){numberInput = 5000;}
+                     //else{numberInput = Integer.parseInt(numberInputString);}
+                                          //String stTesting = st.subString(0, st.indexOf("Sold"));
+                     //System.out.println(stTesting);

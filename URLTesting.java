@@ -42,6 +42,8 @@ import java.awt.Menu;
 import java.awt.Insets;
 import java.net.*;
 import java.util.Scanner;
+import java.io.StringWriter;
+import java.io.PrintWriter;
 
 //https://stackoverflow.com/questions/23045956/icons-on-joptionpane
 
@@ -104,6 +106,15 @@ class URLTesting extends mainWindow{
          x.remove(xLabel);
          }
       catch(IOException | NullPointerException eTwo){
+         StringWriter sw = new StringWriter();
+         PrintWriter pw = new PrintWriter(sw);
+         eTwo.printStackTrace(pw);
+         String stackTrace = sw.toString();
+         System.out.println(stackTrace);
+         //System.out.println(stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("Status=") + 10));
+         System.out.println("this is stackTrace: " + stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35));
+         JOptionPane.showMessageDialog(null, stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35), "HTTP ERROR",JOptionPane.ERROR_MESSAGE);
+
          try{
             System.out.println("IOEXCEPTION @URLREADER");
             numberExecuted.add(1);
