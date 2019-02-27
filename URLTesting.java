@@ -45,7 +45,13 @@ import java.util.Scanner;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Map;
+
 //https://stackoverflow.com/questions/23045956/icons-on-joptionpane
+//https://crunchify.com/simple-way-to-get-http-response-header-in-java/
 
 class URLTesting extends mainWindow{
    public static Color backGroundWhite = new Color(250, 249, 250);
@@ -88,6 +94,23 @@ class URLTesting extends mainWindow{
       try{
          numberExecuted.add(1);
          Document documentTwo = Jsoup.connect(URL).get();
+         
+         
+         URL obj = new URL(URL);
+         URLConnection  connection = obj.openConnection();
+         System.out.println();
+         System.out.println("--------------------------------------");
+         System.out.println();
+         Map<String, List<String>> map = connection.getHeaderFields();
+            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+				System.out.println(entry.getKey() + " : " + entry.getValue());
+			}
+         System.out.println();
+         System.out.println("--------------------------------------");
+         System.out.println();
+         
+         
+         
          Elements linksTwo = documentTwo.select("a[href]");
          String ownTextTwo = documentTwo.body().text();
          System.out.println("this is ownTextTwo" + ownTextTwo);
@@ -101,20 +124,29 @@ class URLTesting extends mainWindow{
          x.add(xLabel);
          JOptionPane.showMessageDialog(null, "Found html data continue?", "HTMLDATAFOUND",JOptionPane.ERROR_MESSAGE);
          BufferedWriter writer = new BufferedWriter(new FileWriter("testing.txt"));
+         //
+         //Note: Remove BufferedWriter and dependencies on .txt files, it is not needed. 
+         //
          writer.write(ownTextTwo);
+         System.out.println("Writer has writen");
          writer.close();
          x.remove(xLabel);
          }
       catch(IOException | NullPointerException eTwo){
-         StringWriter sw = new StringWriter();
-         PrintWriter pw = new PrintWriter(sw);
-         eTwo.printStackTrace(pw);
-         String stackTrace = sw.toString();
-         System.out.println(stackTrace);
-         //System.out.println(stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("Status=") + 10));
-         System.out.println("this is stackTrace: " + stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35));
-         JOptionPane.showMessageDialog(null, stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35), "HTTP ERROR",JOptionPane.ERROR_MESSAGE);
-
+         try{
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            //eTwo.printStackTrace(pw);
+            String stackTrace = sw.toString();
+            //if(stackTrace.contains(stackTrace.substring(stackTrace.indexOf("HTTP error")))){
+            //System.out.println(stackTrace);
+            //System.out.println(stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("Status=") + 10));
+            System.out.println("this is stackTrace: " + stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35));
+            JOptionPane.showMessageDialog(null, stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35), "HTTP ERROR",JOptionPane.ERROR_MESSAGE);
+            //}
+            //else{System.out.println("NULLPOINTER EXCEPTION @URLREADER MOST LIKELY");}
+         }
+         catch(StringIndexOutOfBoundsException eThree){eThree.printStackTrace();}
          try{
             System.out.println("IOEXCEPTION @URLREADER");
             numberExecuted.add(1);

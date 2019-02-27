@@ -50,8 +50,10 @@ import static java.awt.event.KeyEvent.*;
 import java.awt.event.KeyListener;
 import java.io.File;
 
+//https://stackoverflow.com/questions/19156143/java-how-request-a-new-ip-every-cycle-of-my-application
 //https://stackoverflow.com/questions/1248510/convert-string-to-keyevents
 //https://stackoverflow.com/questions/19035893/finding-second-occurrence-of-a-substring-in-a-string-in-java/35155037
+//https://stackoverflow.com/questions/2793150/how-to-use-java-net-urlconnection-to-fire-and-handle-http-requests?rq=1
 
 class button implements ActionListener{
    
@@ -111,41 +113,48 @@ class getterButton extends button implements ActionListener{
                BufferedReader brSale = new BufferedReader(new FileReader("testing.txt"));
                String st;
                while((st = brSale.readLine()) != null){
-               ArrayList testSaleCounter = new ArrayList();
-               testSaleCounter.add(st.indexOf(testSaleTwo));
-               //https://www.etsy.com/shop/mrcwoodproducts/sold
-               //https://www.etsy.com/shop/WhoKnowsWhat/sold
-                     int subtract = (int)testSaleCounter.get(0) - 1;
-                     testSaleCounter.set(0,subtract);
-                     int numberInput;
-                     int addedIndex = 0;
-                     //System.out.println("number of loops: " + numberInput);
-                     st = st.replace("Close Beginning of a dialog window, including tabbed navigation to register an account or sign in to an existing account. Both registration and sign in support using google and facebook accounts. Escape will close this window." , "").replace(" Register Sign in Get started Continue with Facebook Continue with Google We'll never post without your permission.","").replace(" OR Email or Username Have an account? Sign in Just one more","").replace(" already have an Etsy account. Sign in with Facebook Sign in with Google OR Email or Username Password Stay signed in Forgot your password? Forgot your username or email? Reopen your account? Etsy Browse Browse Search for items or shops Search Skip to Content Sell on Etsy Sell Register Sign in Discover Cart Cart 0 Jewelry & Accessories Clothing & Shoes Home & Living Wedding & Party Toys & Entertainment Art & Collectibles Craft Supplies Vintage Gifts Take full advantage of our site features by enabling JavaScript.","[Ignore any previous undeditable html]").replace("Create your Etsy password Create Your Etsy Account Continue with Facebook Continue with Google We'll never post without your permission. OR First Name Email Password Confirm Password By clicking Register, you agree to Etsy's Terms of Use and Privacy Policy. Etsy may send you communications; you may change your preferences in your account settings. Uh oh! You need to have cookies enabled to sign in. Welcome back","").replace("stepà","[stepa was replaced]");
-                     System.out.println(st);
-                     //String te = " stepà  Niceùyou[Ignore any previous undeditable html] Learn more mrcwoodproducts mrcwoodproducts 89998 Sales Pittsboro, Indiana Pittsboro, Indiana 5 out of 5 stars (15807) ";
-                     //System.out.println("this is the length: " + te.length());
-                     //
-                     //NOTE TO SELF: change so this isn't reliant on updating a .txt it is screwing up different links
-                     String finalText = st.replace(st.substring(0,st.indexOf("Sold") + 4), "");;
-                     System.out.println(finalText);
-                     System.out.println(st.substring(173,st.indexOf("Sold")));
-                     int numberOfStrings = finalText.length();
-                     ArrayList indexerNumber = new ArrayList();
-                     for(int i = 0; i < numberOfStrings; i++){
-                        try{
-                           System.out.println("this is the last index of sold" + st.lastIndexOf("Sold"));
-                           int indexer = getLength(finalText);
-                           System.out.println(indexer);
-                           int indexerTwo = finalText.indexOf("Eligible", finalText.indexOf("Eligible") + indexer);
-                           String testing = finalText.substring(indexerTwo) + finalText.indexOf("Sold");
-                           //System.out.println(indexer);
-                           String t = testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4); 
-                           System.out.println(t.substring(t.indexOf("to") + 2));
-                           //System.out.println(testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4));
-                           //System.out.println(t.replace(t.substring(45), ""));
-                           finalText = finalText.replace(finalText.substring(0,indexer + 1), ""); //this might be why the indexer is only printing out 17 instead of the 24 becuase the sold is being canceled out by the one
-                           indexerNumber.add(indexer);
-                        }         
+                  ArrayList testSaleCounter = new ArrayList();
+                  testSaleCounter.add(st.indexOf(testSaleTwo));
+                  //https://www.etsy.com/shop/mrcwoodproducts/sold
+                  //https://www.etsy.com/shop/WhoKnowsWhat/sold
+                  int subtract = (int)testSaleCounter.get(0) - 1;
+                  testSaleCounter.set(0,subtract);
+                  int numberInput;
+                  int addedIndex = 0;
+                  //System.out.println("number of loops: " + numberInput);
+                  st = st.replace("Close Beginning of a dialog window, including tabbed navigation to register an account or sign in to an existing account. Both registration and sign in support using google and facebook accounts. Escape will close this window." , "").replace(" Register Sign in Get started Continue with Facebook Continue with Google We'll never post without your permission.","").replace(" OR Email or Username Have an account? Sign in Just one more","").replace(" already have an Etsy account. Sign in with Facebook Sign in with Google OR Email or Username Password Stay signed in Forgot your password? Forgot your username or email? Reopen your account? Etsy Browse Browse Search for items or shops Search Skip to Content Sell on Etsy Sell Register Sign in Discover Cart Cart 0 Jewelry & Accessories Clothing & Shoes Home & Living Wedding & Party Toys & Entertainment Art & Collectibles Craft Supplies Vintage Gifts Take full advantage of our site features by enabling JavaScript.","[Ignore any previous undeditable html]").replace("Create your Etsy password Create Your Etsy Account Continue with Facebook Continue with Google We'll never post without your permission. OR First Name Email Password Confirm Password By clicking Register, you agree to Etsy's Terms of Use and Privacy Policy. Etsy may send you communications; you may change your preferences in your account settings. Uh oh! You need to have cookies enabled to sign in. Welcome back","").replace("stepà","[stepa was replaced]");
+                  //System.out.println(st);
+                  System.out.println("[" + st.substring(st.indexOf("Sales") - 7, st.indexOf("Sales") + 5) + " ]"); 
+                  //String te = " stepà  Niceùyou[Ignore any previous undeditable html] Learn more mrcwoodproducts mrcwoodproducts 89998 Sales Pittsboro, Indiana Pittsboro, Indiana 5 out of 5 stars (15807) ";
+                  //System.out.println("this is the length: " + te.length());
+                  //
+                  //NOTE TO SELF: change so this isn't reliant on updating a .txt it is screwing up different links
+                  String finalText = st.replace(st.substring(0,st.indexOf("Sold") + 4), "");;
+                  //System.out.println(finalText);
+                  System.out.println(st.indexOf("Eligible orders ship free Favorite Add to Word Art Wood 3D Cutout Family by MRC Wood Products Sold"));
+                  System.out.println(st.substring(173,st.indexOf("Sold")));
+                  st = st.replaceAll(" ","");
+                  System.out.println("This is st: " + st);
+                  int numberOfStrings = finalText.length();
+                  ArrayList indexerNumber = new ArrayList();
+                  for(int i = 0; i < numberOfStrings; i++){
+                     try{
+                        //System.out.println("this is the last index of sold" + st.lastIndexOf("Sold"));
+                        int indexer = getLength(finalText);
+                        //System.out.println(indexer);
+                        int indexerTwo = finalText.indexOf("Eligible", finalText.indexOf("Eligible") + indexer);
+                        String testing = finalText.substring(indexerTwo) + finalText.indexOf("Sold");
+                        //System.out.println(indexer);
+                        String t = testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4); 
+                        System.out.println("Item Number: " + i + " Item: " + t);
+                        //System.out.println(t.substring(t.indexOf("to") + 2));
+                        //System.out.println(testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4));
+                        //System.out.println(t.replace(t.substring(45), ""));
+                        finalText = finalText.replace(finalText.substring(0,indexer + 1), ""); //this might be why the indexer is only printing out 17 instead of the 24 becuase the sold is being canceled out by the one
+                        //finalText = finalText.replace(finalText.substring(0, indexer), "");
+                        //System.out.println(finalText);
+                        indexerNumber.add(indexer);
+                      }         
                         catch(StringIndexOutOfBoundsException e){
                               System.out.println("string ended"); 
                               break;
@@ -158,9 +167,17 @@ class getterButton extends button implements ActionListener{
                         int tTwo = (int)indexerNumber.get(i);
                         sum += tTwo;
                      }
+                     //Issue with this now is that the text has no spaces and the text above does?
+                     //maybe if I erase the spaces in the text above I can do the indexer correctly
+                     //although it may not be an issue with the spaces although it is the most 
+                     //likely thing.
                      System.out.println("this is the sum: " + sum);
                      if(sum != st.lastIndexOf("Sold")){
                         JOptionPane.showMessageDialog(null, "Missing " + (st.lastIndexOf("Sold") - sum) + " Indexes", "MissingIndexes",JOptionPane.ERROR_MESSAGE);
+                        System.out.println("missing " + (st.lastIndexOf("Sold") - sum) + "Indexes");
+                        System.out.println(st.indexOf("Personalized"));
+                        st = st.replace(st.substring(0,st.indexOf("Personalized")), "");
+                        System.out.println("this is last index : " + st.substring(0, st.indexOf("Sold")));
                      }
                      System.out.println(st.substring(1722,2950));
                      PrintWriter writer = new PrintWriter("testing.txt");
