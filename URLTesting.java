@@ -74,14 +74,12 @@ class URLTesting extends mainWindow{
          }
          mainMethod(tTwo.toString().replace("[","").replace("]","").replace(",","").replace(" ", ""));
          tTwo.clear();
-         //System.out.println("tTwo:" + tTwo);
       }
    }
    public static void mainMethod(String domain){
       try{
          URL url = new URL("http", domain, ".com/");
          String output = url.toExternalForm();
-         //System.out.println(output);
          URLString.add(output);
          System.out.println("URLString is " + URLString);
          URLReader(output);
@@ -113,6 +111,8 @@ class URLTesting extends mainWindow{
          
          Elements linksTwo = documentTwo.select("a[href]");
          String ownTextTwo = documentTwo.body().text();
+         saleText = "";
+         saleText = ownTextTwo;
          System.out.println("this is ownTextTwo" + ownTextTwo);
          int t = numberExecuted.size();
          String tTwo = String.valueOf(t);
@@ -124,9 +124,6 @@ class URLTesting extends mainWindow{
          x.add(xLabel);
          JOptionPane.showMessageDialog(null, "Found html data continue?", "HTMLDATAFOUND",JOptionPane.ERROR_MESSAGE);
          BufferedWriter writer = new BufferedWriter(new FileWriter("testing.txt"));
-         //
-         //Note: Remove BufferedWriter and dependencies on .txt files, it is not needed. 
-         //
          writer.write(ownTextTwo);
          System.out.println("Writer has writen");
          writer.close();
@@ -138,13 +135,11 @@ class URLTesting extends mainWindow{
             PrintWriter pw = new PrintWriter(sw);
             //eTwo.printStackTrace(pw);
             String stackTrace = sw.toString();
-            //if(stackTrace.contains(stackTrace.substring(stackTrace.indexOf("HTTP error")))){
-            //System.out.println(stackTrace);
-            //System.out.println(stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("Status=") + 10));
-            System.out.println("this is stackTrace: " + stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35));
-            JOptionPane.showMessageDialog(null, stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35), "HTTP ERROR",JOptionPane.ERROR_MESSAGE);
-            //}
-            //else{System.out.println("NULLPOINTER EXCEPTION @URLREADER MOST LIKELY");}
+            if(stackTrace.contains("HTTP error")){
+               System.out.println("this is stackTrace: " + stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35));
+               JOptionPane.showMessageDialog(null, stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("HTTP error") + 35), "HTTP ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            else{System.out.println("IOEXCEPTION/NULLPOINTER @ URLREADER");}
          }
          catch(StringIndexOutOfBoundsException eThree){eThree.printStackTrace();}
          try{
@@ -181,8 +176,11 @@ class URLTesting extends mainWindow{
 }
 
 
-
-
+            //}
+            //else{System.out.println("NULLPOINTER EXCEPTION @URLREADER MOST LIKELY");}
+            //if(stackTrace.contains(stackTrace.substring(stackTrace.indexOf("HTTP error")))){
+            //System.out.println(stackTrace);
+            //System.out.println(stackTrace.substring(stackTrace.indexOf("HTTP error"), stackTrace.indexOf("Status=") + 10));
             //String trTest = stuff.get(x).toString();
             //System.out.println(tr.toString());
             //tr.toString();

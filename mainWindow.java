@@ -91,6 +91,7 @@ class mainWindow extends Frame{
    public static ArrayList numberExecuted = new ArrayList();
    public static ArrayList escapeChecker = new ArrayList();
    public static textBox showBox = new textBox();
+   public static String saleText;
    public mainWindow(){
       super("DataMiner");
       setSize(300,300);

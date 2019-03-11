@@ -50,6 +50,12 @@ import static java.awt.event.KeyEvent.*;
 import java.awt.event.KeyListener;
 import java.io.File;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 //https://stackoverflow.com/questions/19156143/java-how-request-a-new-ip-every-cycle-of-my-application
 //https://stackoverflow.com/questions/1248510/convert-string-to-keyevents
 //https://stackoverflow.com/questions/19035893/finding-second-occurrence-of-a-substring-in-a-string-in-java/35155037
@@ -78,8 +84,28 @@ class getterButton extends button implements ActionListener{
    public void actionPerformed(ActionEvent e){extenderClass.mainExtenderMethod();}
    public static ArrayList booleanCheckerTwo = new ArrayList();
    public static class extenderClass extends mainWindow{
+   
+      public static void duplicateWordFinder(String words){
+         List<String> list = Arrays.asList(words.split(" "));
+         Set<String> singleWords = new HashSet<String>(list);
+         for(String word : singleWords){
+            System.out.println(word + ": " + Collections.frequency(list,word));
+         }
+      }
+      
       public static void mainExtenderMethod(){
-         if(booleanChecker.get(0).equals(3)){mainExtenderClassMethodM(textBox.getTextBox(showBox));}
+         if(booleanChecker.get(0).equals(3)){
+            mainExtenderClassMethodM(textBox.getTextBox(showBox));
+            int input = JOptionPane.showConfirmDialog(null, "Find Duplicates?","Find Duplicates?",JOptionPane.OK_CANCEL_OPTION);
+            if(input == JOptionPane.OK_OPTION){
+            //
+            //
+            //
+            //
+            //
+            //
+            }
+         }
          if(booleanChecker.get(0).equals(2)){mainExtenderClassMethodMTwo();}
          if(booleanChecker.get(0).equals(4)){
             CharSequence find = JOptionPane.showInputDialog("Enter Site; Type in this format: i.e google.com");
@@ -119,7 +145,8 @@ class getterButton extends button implements ActionListener{
                      URLTesting.URLReader(urlHolder.get(i - 1).toString()); 
                      System.out.println("This is the current Url: " + urlHolder.get(i - 1).toString());
                      //scannerMethodWebsite(URLTesting.URLReader(urlHolder.get(i - 1).toString()));
-                     scannerMethodWebsite(saleText);
+                     //scannerMethodWebsite(saleText);
+                     testingIndexing.testingIndexingExtended.indexingMethod(saleText);
                   }
                }
   
@@ -159,12 +186,16 @@ class getterButton extends button implements ActionListener{
                   int indexerTwo = finalText.indexOf("Eligible", finalText.indexOf("Eligible") + indexer);
                   String testing = finalText.substring(indexerTwo) + finalText.indexOf("Sold");
                   //System.out.println(indexer);
-                  String t = testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4); 
-                  System.out.println("Item Number: " + i + " Item: " + t);
+                  String t = testing.substring(testing.indexOf("Eligible") - 1, testing.indexOf("Sold") + 4); 
+                  System.out.println("Item Number: " + i + " Item:" + t);
                   //System.out.println(t.substring(t.indexOf("to") + 2));
                   //System.out.println(testing.substring(testing.indexOf("Eligible"), testing.indexOf("Sold") + 4));
                   //System.out.println(t.replace(t.substring(45), ""));
-                  finalText = finalText.replace(finalText.substring(0,indexer + 1), ""); //this might be why the indexer is only printing out 17 instead of the 24 becuase the sold is being canceled out by the one
+                  finalText = finalText.replace(finalText.substring(0,indexer - 1), ""); //this might be why the indexer is only printing out 17 instead of the 24 becuase the sold is being canceled out by the one
+                  System.out.println("");
+                  System.out.println("Current Index: " + indexer);
+                  System.out.println("replaced item:" + finalText.substring(0,indexer - 1));
+                  System.out.println("");
                   //finalText = finalText.replace(finalText.substring(0, indexer), "");
                   //System.out.println(finalText);
                   indexerNumber.add(indexer);
@@ -198,11 +229,11 @@ class getterButton extends button implements ActionListener{
       }
          
       public static int getLength(String text){
-         int indexOne = text.indexOf("Eligible");
-         int indexTwo = text.indexOf("Sold");
+         int indexOne = text.indexOf("Eligible") - 1;
+         int indexTwo = text.indexOf("Sold") + 4;
          String indexText = text.substring(indexOne, indexTwo);
          int lengthOf = indexText.length();
-         return lengthOf + 4;
+         return lengthOf;
       }
       
       public static String findingIndexChoosing(String string, String findingString, int indexNumber){
