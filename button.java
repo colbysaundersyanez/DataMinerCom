@@ -141,16 +141,88 @@ class getterButton extends button implements ActionListener{
                else{
                   for(int i = 1; i <= numberOfPagesInteger; i++){
                      urlHolder.add(urlSale + "?ref=pagination&page=" + i);
-                     System.out.println("this is urlHolder: " + urlHolder);
+                     //System.out.println("this is urlHolder: " + urlHolder);
                      URLTesting.URLReader(urlHolder.get(i - 1).toString()); 
                      System.out.println("This is the current Url: " + urlHolder.get(i - 1).toString());
                      //scannerMethodWebsite(URLTesting.URLReader(urlHolder.get(i - 1).toString()));
                      //scannerMethodWebsite(saleText);
-                     testingIndexing.testingIndexingExtended.indexingMethod(saleText);
+                     //testingIndexing.testingIndexingExtended.indexingMethod(saleText);
                   }
                }
   
           }
+         if(booleanChecker.get(0).equals(7)){
+            int option = JOptionPane.showConfirmDialog(null, "Sort Data?", "SortingData",JOptionPane.OK_CANCEL_OPTION);
+            if(option == JOptionPane.OK_OPTION){
+               try{
+                  System.out.println("Enter word that needs to be found");
+                  String wordToBeFound = JOptionPane.showInputDialog("Input Word(s) that you want to find. \nLeave empty for all words. (Case Sensative)");
+                  Scanner sc = new Scanner(new File("output.txt"));
+                  while(sc.hasNextLine()){
+                     String line = sc.nextLine();
+                     finalWordContainerTwo.add(line);
+                     //System.out.println(line);
+                     if(line.contains(wordToBeFound)){
+                        finalWordContainer.add(line);
+                        //System.out.println(line);
+                        numberStore.add(1);
+                     }
+                  }
+               }
+               catch(FileNotFoundException esw){System.out.println("FILENOTFOUND @BOOLEANCHECKER 7");}
+               for(int i = 0; i < finalWordContainer.size();i++){
+                  System.out.println("Item #" + (i + 1) + " " + finalWordContainer.get(i));
+               }
+               Object[] buttonOptions = {"Open Results in NotePad", "Create Graph","Sort All"};
+               JPanel panel = new JPanel();
+               panel.add(new JLabel("Number of times line with word was found: " + numberStore.size()));
+               int panelJPane = JOptionPane.showOptionDialog(null, panel, "Choose One", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, buttonOptions, null);
+               if(panelJPane == JOptionPane.YES_OPTION){
+                  try{
+                     File file = new File("output2.txt");
+                     if(file.exists()){file.delete();}
+                     else{System.out.println("File not found");}
+                     BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                     for(int i = 0; i < finalWordContainer.size();i++){
+                        writer.write(finalWordContainer.get(i) + "\n");
+                        System.out.println(finalWordContainer.get(i));
+                     }
+                     writer.close();
+                     ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "output2.txt");
+                     pb.start();
+                  }
+                  catch(IOException eswe){System.out.println("IOException @BooleanChecker 7");}
+               }
+               if(panelJPane == JOptionPane.NO_OPTION){
+                  System.out.println("NOOPTION WORKING");
+               }
+               if(panelJPane == JOptionPane.CANCEL_OPTION){
+                  //Scanner scTwo = new Scanner(new File("output.txt"));
+                  for(int i = 0; i < finalWordContainer.size(); i++){
+                     if(!wordSortingContainer.contains(finalWordContainerTwo.get(i))){
+                        wordSortingContainer.add(finalWordContainerTwo.get(i));
+                     }
+                  }
+                  //
+                  for(int x = 0; x < finalWordContainerTwo.size(); x++){
+                     for(int t = 0; t < wordSortingContainer.size(); t++){
+                        if(finalWordContainerTwo.contains(wordSortingContainer.get(t))){
+                           finalWordContainerTwo.remove(wordSortingContainer.get(t));
+                           System.out.println("Number of times found: " + t + " " + finalWordContainerTwo.get(x));
+                           //System.out.println("Number of times found: " + t + " " + finalWordContainerTwo.get(x));
+                        }
+                     }
+                  }
+                  System.out.println(wordSortingContainer);
+                  System.out.println("CANCELOPTION WORKING");
+               }
+               System.out.println("Number of times line with word was found: " + numberStore.size());
+               finalWordContainer.clear();
+               numberStore.clear();
+            }
+         else{System.out.println("Action Not Carried Out");}
+
+         }
          else if(booleanChecker.get(0).equals(0)){System.out.println("nothing is selected"); System.out.println(booleanChecker.get(0));}
          }
          

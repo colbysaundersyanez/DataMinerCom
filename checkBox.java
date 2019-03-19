@@ -124,6 +124,21 @@ class fileChooser extends checkBox implements ItemListener{
    }
 }
 
+class sortingData extends checkBox implements ItemListener{
+   public void itemStateChanged(ItemEvent ess){sortingData.sortingDataExtender.sortingDataMethod();}
+   static class sortingDataExtender extends mainWindow{
+      public static void sortingDataMethod(){
+         if(booleanChecker.size() == 0){
+            booleanChecker.add(7);
+         }
+         else{
+            booleanChecker.clear();
+            System.out.println("booleanChecker cleared" + booleanChecker.size());
+         }
+      }
+   }
+}
+
 class socialMedia extends checkBox implements ItemListener{
    public static Label socialMediaOne = new Label("Will do a social media");
    public static Label socialMediaTwo = new Label("search according to ");

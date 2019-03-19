@@ -44,6 +44,7 @@ import java.net.*;
 import java.util.Scanner;
 import java.io.StringWriter;
 import java.io.PrintWriter;
+import java.io.FileWriter;
 
 import java.net.URL;
 import java.net.URLConnection;
@@ -91,29 +92,32 @@ class URLTesting extends mainWindow{
    public static void URLReader(String URL){
       try{
          numberExecuted.add(1);
-         Document documentTwo = Jsoup.connect(URL).get();
+         Document documentTwo = Jsoup.connect(URL).maxBodySize(0).get();
          
          
-         URL obj = new URL(URL);
-         URLConnection  connection = obj.openConnection();
-         System.out.println();
-         System.out.println("--------------------------------------");
-         System.out.println();
-         Map<String, List<String>> map = connection.getHeaderFields();
-            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-				System.out.println(entry.getKey() + " : " + entry.getValue());
-			}
-         System.out.println();
-         System.out.println("--------------------------------------");
-         System.out.println();
+         //URL obj = new URL(URL);
+         //URLConnection  connection = obj.openConnection();
          
-         
-         
-         Elements linksTwo = documentTwo.select("a[href]");
-         String ownTextTwo = documentTwo.body().text();
-         saleText = "";
-         saleText = ownTextTwo;
-         System.out.println("this is ownTextTwo" + ownTextTwo);
+         //System.out.println();
+         //System.out.println("--------------------------------------");
+         //System.out.println();
+         //Map<String, List<String>> map = connection.getHeaderFields();
+         //   for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+			//	System.out.println(entry.getKey() + " : " + entry.getValue());
+			//}
+         //System.out.println();
+         //System.out.println("--------------------------------------");
+         //System.out.println();
+         elementGetter(documentTwo);
+         PrintStream fileStream = new PrintStream(new File("output.txt"));
+         for(int i = 0; i<=containerStrings.size() - 1;i++){
+            fileStream.println(containerStrings.get(i));
+         }
+         fileStream.close();         
+         //String ownTextTwo = documentTwo.body().text();
+         //saleText = "";
+         //saleText = ownTextTwo;
+         //System.out.println("this is ownTextTwo" + ownTextTwo);
          int t = numberExecuted.size();
          String tTwo = String.valueOf(t);
          System.out.println(tTwo);
@@ -122,11 +126,11 @@ class URLTesting extends mainWindow{
          xLabel.setBackground(Color.white);
          xLabel.setFont(font);
          x.add(xLabel);
-         JOptionPane.showMessageDialog(null, "Found html data continue?", "HTMLDATAFOUND",JOptionPane.ERROR_MESSAGE);
-         BufferedWriter writer = new BufferedWriter(new FileWriter("testing.txt"));
-         writer.write(ownTextTwo);
-         System.out.println("Writer has writen");
-         writer.close();
+         //JOptionPane.showMessageDialog(null, "Found html data continue?", "HTMLDATAFOUND",JOptionPane.ERROR_MESSAGE);
+         //BufferedWriter writer = new BufferedWriter(new FileWriter("testing.txt"));
+         //writer.write(ownTextTwo);
+         //System.out.println("Writer has writen");
+         //writer.close();
          x.remove(xLabel);
          }
       catch(IOException | NullPointerException eTwo){
@@ -160,7 +164,41 @@ class URLTesting extends mainWindow{
          }
       }
    }
-   
+   //https://www.etsy.com/shop/mrcwoodproducts/sold
+   public static void elementGetter(Document doc){
+      int numberOfLinks;
+      Elements linksTwo = doc.select("a[href]");
+      Element link;
+      for(int i = 0; i < 1000; i++){
+         try{
+            link = linksTwo.get(i);
+            String linkString = link.attr("abs:href").toString();
+            if(linkString.contains("listing")){
+               int lastIndex = linkString.length();
+               String linkStringEnding = linkString.substring(linkString.indexOf("?"), lastIndex);
+               linkString = linkString.replace("-"," ").replace("https://www.etsy.com/listing/","").replace(linkStringEnding, "");
+               linkString = linkString.replace(linkString.substring(0,linkString.indexOf("/") + 1),"");
+               containerStrings.add(linkString);//.replace("https://www.etsy.com/listing/","").replace(linkString.substring(linkString.indexOf("?"), linkString.indexOf(linkString.length() - 1)),""));
+            }
+            
+            //System.out.println("number of links: " + numberOfLinks);
+            //System.out.println(conatinerStrings);
+         }
+
+         catch(IndexOutOfBoundsException e){
+            System.out.println("IndexOutOfBoundsException @elementGetter");
+            //e.printStackTrace();
+            break;
+         }
+      }
+      try{
+         numberOfLinks = containerStrings.size() + 1;
+         for(int iTwo = 0; iTwo <= numberOfLinks; iTwo++){
+            System.out.println("Item #" + (iTwo + 1) + ": " + containerStrings.get(iTwo));
+         }
+      }
+      catch(IndexOutOfBoundsException eTwo){System.out.println("IndexOutOfBoundsException @elementGetter2");}
+   }
    
    public static ArrayList randomLetterMethod(int a, int b, int c){
       stuff.clear();

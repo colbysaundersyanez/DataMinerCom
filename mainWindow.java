@@ -91,7 +91,12 @@ class mainWindow extends Frame{
    public static ArrayList numberExecuted = new ArrayList();
    public static ArrayList escapeChecker = new ArrayList();
    public static textBox showBox = new textBox();
+   public static ArrayList<String> containerStrings = new ArrayList<String>();
    public static String saleText;
+   public static ArrayList numberStore = new ArrayList();
+   public static ArrayList<String> finalWordContainer = new ArrayList<String>();
+   public static ArrayList<String> wordSortingContainer = new ArrayList<String>();
+   public static ArrayList<String> finalWordContainerTwo = new ArrayList<String>();
    public mainWindow(){
       super("DataMiner");
       setSize(300,300);
@@ -161,5 +166,7 @@ class accessoryLayoutClass extends mainWindow{
       randomSearchCheck.checkBoxCreator(x,"Rand Search" , 180,70,100,20);
       saleFinder saleFinderCheck = new saleFinder();
       saleFinderCheck.checkBoxCreator(x,"Sale Finder" , 180,90,100,20);
+      sortingData sortingDataCheck = new sortingData();
+      sortingDataCheck.checkBoxCreator(x,"Sorting" , 180,110,100,20);
    }
 }
