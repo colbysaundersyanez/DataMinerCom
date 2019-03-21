@@ -197,23 +197,29 @@ class getterButton extends button implements ActionListener{
                   System.out.println("NOOPTION WORKING");
                }
                if(panelJPane == JOptionPane.CANCEL_OPTION){
-                  //Scanner scTwo = new Scanner(new File("output.txt"));
-                  for(int i = 0; i < finalWordContainer.size(); i++){
+                  //System.out.println(finalWordContainerTwo);
+                  for(int i = 0; i < finalWordContainerTwo.size(); i++){
                      if(!wordSortingContainer.contains(finalWordContainerTwo.get(i))){
                         wordSortingContainer.add(finalWordContainerTwo.get(i));
                      }
                   }
-                  //
-                  for(int x = 0; x < finalWordContainerTwo.size(); x++){
-                     for(int t = 0; t < wordSortingContainer.size(); t++){
-                        if(finalWordContainerTwo.contains(wordSortingContainer.get(t))){
-                           finalWordContainerTwo.remove(wordSortingContainer.get(t));
-                           System.out.println("Number of times found: " + t + " " + finalWordContainerTwo.get(x));
-                           //System.out.println("Number of times found: " + t + " " + finalWordContainerTwo.get(x));
-                        }
+                  int sumOfIntegers = 0;
+                  for(int x = 0; x < finalWordContainerTwo.size() ; x++){
+                     try{
+                        int occurences = Collections.frequency(finalWordContainerTwo, wordSortingContainer.get(x));
+                        finalProductNumbers.add(occurences);
+                        sumOfIntegers += occurences;
                      }
+                     catch(IndexOutOfBoundsException re){}
                   }
-                  System.out.println(wordSortingContainer);
+                  //System.out.println(wordSortingContainer);
+                  //System.out.println(finalProductNumbers);
+                  System.out.println("-----------------------------------------------");
+                  
+                  for(int s = 0; s < wordSortingContainer.size() ; s++){
+                     System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
+                  }
+                  System.out.println("this is the number in sumOfInteger: " + sumOfIntegers);
                   System.out.println("CANCELOPTION WORKING");
                }
                System.out.println("Number of times line with word was found: " + numberStore.size());
@@ -526,6 +532,38 @@ class textBoxClear extends button implements ActionListener{
    }
 }
 
+
+                  //int sumOfArray;
+                  //int i;
+                  //int finalIntTwo = Integer.parseInt(finalProductNumbers.get(0));
+                 // for(i = 0; i < finalProductNumbers.size(); i++){
+                //     Object finalInt = finalProductNumbers.get(i);
+                 //    int te = Integer.parseInt(finalInt);
+                 //    sumOfArray += te;
+                 // }
+                  //int te = 0;
+                  //
+                  //for (int k = Integer.valueOf(finalProductNumbers.get(te)) ; te < finalProductNumbers.size(); te++){
+                  //   sumOfArray += k;
+                  //}
+                  //System.out.println("this is the sum of array: " + sumOfArray);
+               
+                  //Scanner scTwo = new Scanner(new File("output.txt"));
+                  //for(int i = 0; i < finalWordContainer.size(); i++){
+                  //   if(!wordSortingContainer.contains(finalWordContainerTwo.get(i))){
+                  //      wordSortingContainer.add(finalWordContainerTwo.get(i));
+                  //   }
+                 // }
+                  //
+                 // for(int x = 0; x < finalWordContainerTwo.size(); x++){
+                  //   for(int t = 0; t < wordSortingContainer.size(); t++){
+                  //      if(finalWordContainerTwo.contains(wordSortingContainer.get(t))){
+                  //         finalWordContainerTwo.remove(wordSortingContainer.get(t));
+                  //         System.out.println("Number of times found: " + t + " " + finalWordContainerTwo.get(x));
+                  //         //System.out.println("Number of times found: " + t + " " + finalWordContainerTwo.get(x));
+                   //     }
+                   //  }
+                 // }
 
 //left over code
                //Elements metaTags = document.getElementsByTag("meta");

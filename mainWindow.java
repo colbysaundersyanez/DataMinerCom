@@ -97,6 +97,7 @@ class mainWindow extends Frame{
    public static ArrayList<String> finalWordContainer = new ArrayList<String>();
    public static ArrayList<String> wordSortingContainer = new ArrayList<String>();
    public static ArrayList<String> finalWordContainerTwo = new ArrayList<String>();
+   public static ArrayList finalProductNumbers = new ArrayList();
    public mainWindow(){
       super("DataMiner");
       setSize(300,300);

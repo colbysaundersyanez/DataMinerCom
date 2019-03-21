@@ -194,7 +194,7 @@ class URLTesting extends mainWindow{
       try{
          numberOfLinks = containerStrings.size() + 1;
          for(int iTwo = 0; iTwo <= numberOfLinks; iTwo++){
-            System.out.println("Item #" + (iTwo + 1) + ": " + containerStrings.get(iTwo));
+            //System.out.println("Item #" + (iTwo + 1) + ": " + containerStrings.get(iTwo));
          }
       }
       catch(IndexOutOfBoundsException eTwo){System.out.println("IndexOutOfBoundsException @elementGetter2");}
