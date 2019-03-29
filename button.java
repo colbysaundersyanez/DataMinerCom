@@ -149,7 +149,6 @@ class getterButton extends button implements ActionListener{
                      //testingIndexing.testingIndexingExtended.indexingMethod(saleText);
                   }
                }
-  
           }
          if(booleanChecker.get(0).equals(7)){
             int option = JOptionPane.showConfirmDialog(null, "Sort Data?", "SortingData",JOptionPane.OK_CANCEL_OPTION);
@@ -194,6 +193,8 @@ class getterButton extends button implements ActionListener{
                   catch(IOException eswe){System.out.println("IOException @BooleanChecker 7");}
                }
                if(panelJPane == JOptionPane.NO_OPTION){
+                  int[] classNumbers = {900,300};
+                  barGraphClass finalProductsGraph = new barGraphClass(classNumbers[0],classNumbers[1]);
                   System.out.println("NOOPTION WORKING");
                }
                if(panelJPane == JOptionPane.CANCEL_OPTION){
@@ -208,19 +209,29 @@ class getterButton extends button implements ActionListener{
                      try{
                         int occurences = Collections.frequency(finalWordContainerTwo, wordSortingContainer.get(x));
                         finalProductNumbers.add(occurences);
-                        sumOfIntegers += occurences;
+                        //sumOfIntegers += occurences;
                      }
                      catch(IndexOutOfBoundsException re){}
                   }
                   //System.out.println(wordSortingContainer);
                   //System.out.println(finalProductNumbers);
-                  System.out.println("-----------------------------------------------");
-                  
-                  for(int s = 0; s < wordSortingContainer.size() ; s++){
-                     System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
+                  try{
+                     System.out.println("-----------------------------------------------");
+                     File file2 = new File("output3.txt");
+                     if(file2.exists()){file2.delete();}
+                     else{System.out.println("File not found");}
+                     BufferedWriter writerTwo = new BufferedWriter(new FileWriter("output3.txt"));
+                     for(int s = 0; s < wordSortingContainer.size() ; s++){
+                        System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
+                        writerTwo.write(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s) + "\n");
+                     }
+                     writerTwo.close();
+                     ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "output3.txt");
+                     pb.start();
+                     //System.out.println("this is the number in sumOfInteger: " + sumOfIntegers);
+                     System.out.println("CANCELOPTION WORKING");
                   }
-                  System.out.println("this is the number in sumOfInteger: " + sumOfIntegers);
-                  System.out.println("CANCELOPTION WORKING");
+                  catch(IOException ewsde){System.out.println("IOException @new FileWriter(output3.txt)");}
                }
                System.out.println("Number of times line with word was found: " + numberStore.size());
                finalWordContainer.clear();

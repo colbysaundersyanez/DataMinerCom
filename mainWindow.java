@@ -80,6 +80,9 @@ import org.jsoup.select.Elements;
 //have AI open webpage physically open the previous url search for the next page button and gather the url
 //and repeat until theres no more sale pages.
 
+//https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
+//This is for multi-threading in java; multiple more efficient executions in computer. 
+
 
 class mainWindow extends Frame{
    public static JFileChooser chooser;

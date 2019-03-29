@@ -13,19 +13,21 @@ s#k0
 s#j0
 s#l0
 !110;u
-a0	b68	c255	f%\011DataMinerCom.jar	g%\011DataMinerCom.zip	hManifest-Version\0111.0\011Main-Class\011mainWindow!135;g
+a0	b68	c255	f%\011DataMinerCom.jar	g%\011DataMinerCom.zip	hManifest-Version\0111.0\011Main-Class\011mainWindow!159;g
 %\011JSoup%s
 %\011button.java
 %\011mainWindow.java
 %\011URLTesting.java
+%\011barGraphClass.java
 %\011testingIndexing.java
 %\011textBox.java
 %\011checkBox.java
-!135;f
+!159;f
 %\011JSoup%s
 %\011button.java
 %\011mainWindow.java
 %\011URLTesting.java
+%\011barGraphClass.java
 %\011testingIndexing.java
 %\011textBox.java
 %\011checkBox.java

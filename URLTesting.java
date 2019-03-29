@@ -111,7 +111,7 @@ class URLTesting extends mainWindow{
          elementGetter(documentTwo);
          PrintStream fileStream = new PrintStream(new File("output.txt"));
          for(int i = 0; i<=containerStrings.size() - 1;i++){
-            fileStream.println(containerStrings.get(i));
+            fileStream.println(containerStrings.get(i));       
          }
          fileStream.close();         
          //String ownTextTwo = documentTwo.body().text();
@@ -191,13 +191,13 @@ class URLTesting extends mainWindow{
             break;
          }
       }
-      try{
-         numberOfLinks = containerStrings.size() + 1;
-         for(int iTwo = 0; iTwo <= numberOfLinks; iTwo++){
+      //try{
+         //numberOfLinks = containerStrings.size() + 1;
+         //for(int iTwo = 0; iTwo <= numberOfLinks; iTwo++){
             //System.out.println("Item #" + (iTwo + 1) + ": " + containerStrings.get(iTwo));
-         }
-      }
-      catch(IndexOutOfBoundsException eTwo){System.out.println("IndexOutOfBoundsException @elementGetter2");}
+         //}
+      //}
+      //catch(IndexOutOfBoundsException eTwo){System.out.println("IndexOutOfBoundsException @elementGetter2");}
    }
    
    public static ArrayList randomLetterMethod(int a, int b, int c){
