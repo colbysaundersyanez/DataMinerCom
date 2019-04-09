@@ -169,9 +169,9 @@ class getterButton extends button implements ActionListener{
                   }
                }
                catch(FileNotFoundException esw){System.out.println("FILENOTFOUND @BOOLEANCHECKER 7");}
-               for(int i = 0; i < finalWordContainer.size();i++){
-                  System.out.println("Item #" + (i + 1) + " " + finalWordContainer.get(i));
-               }
+               //for(int i = 0; i < finalWordContainer.size();i++){
+                  //System.out.println("Item #" + (i + 1) + " " + finalWordContainer.get(i));
+               //}
                Object[] buttonOptions = {"Open Results in NotePad", "Create Graph","Sort All"};
                JPanel panel = new JPanel();
                panel.add(new JLabel("Number of times line with word was found: " + numberStore.size()));
@@ -222,9 +222,19 @@ class getterButton extends button implements ActionListener{
                      else{System.out.println("File not found");}
                      BufferedWriter writerTwo = new BufferedWriter(new FileWriter("output3.txt"));
                      for(int s = 0; s < wordSortingContainer.size() ; s++){
-                        System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
+                        //System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
                         writerTwo.write(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s) + "\n");
                      }
+                     //Scanner scannerFileOutput = new Scanner(file2);
+                     //while(scannerFileOutput.hasNextLine()){
+                        //String line = scannerFileOutput.nextLine();
+                        //System.out.println(line);
+                        //String scannerStringOne = scannerFile.nextLine();
+                        //System.out.println(scannerStringOne);
+                        //scannerStringOne = scannerStringOne.replaceAll("[^0-9]+", " ");
+                        //System.out.println(Arrays.asList(scannerStringOne.trim().split(" ")));
+                        //}
+
                      writerTwo.close();
                      ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "output3.txt");
                      pb.start();
@@ -233,6 +243,26 @@ class getterButton extends button implements ActionListener{
                   }
                   catch(IOException ewsde){System.out.println("IOException @new FileWriter(output3.txt)");}
                }
+               try{
+               try(BufferedReader brReader = new BufferedReader(new FileReader(new File("output3.txt")))){
+                  String line;
+                  ArrayList finalNumbers = new ArrayList();
+                  ArrayList finalNumbersSorted = new ArrayList();
+                  while((line = brReader.readLine()) != null){
+                     String lineChanger = line;
+                     lineChanger = lineChanger.replaceAll("[^0-9]+", " ");
+                     finalNumbers.add(lineChanger);
+                     finalNumbersSorted.add(finalNumbers.get(finalNumbers.size() - 1));
+                     System.out.println(finalNumbers.size() - 1);
+                     finalNumbers.clear();
+                     System.out.println(finalNumbers);
+                  }
+                  brReader.close();
+                  System.out.println(finalNumbersSorted);
+                  System.out.println("brReader closed");
+               }
+               }
+               catch(IOException ewtg3){System.out.println("IOException @brReader");}
                System.out.println("Number of times line with word was found: " + numberStore.size());
                finalWordContainer.clear();
                numberStore.clear();

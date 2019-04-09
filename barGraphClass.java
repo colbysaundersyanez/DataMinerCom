@@ -56,7 +56,7 @@ class barGraphClass extends Frame{
    public int width;
    public int numberOfGraphs = 28;
    public static Color backGroundWhite = new Color(250, 249, 250);
-   public int[] graphHeight = {180,90};
+   public int[] graphHeight = {50}; //first one only allowed to change within the range of 25 - 225
    //public int[] graphWidth = {30,15, 60,15, 90,15, 120, 15, 150,15, 180,15, 210, 15, 240, 15};
    ArrayList graphWidthArrayList = new ArrayList();
    public int[] graphWidth = {};
@@ -84,7 +84,7 @@ class barGraphClass extends Frame{
       Graphics2D g2 = (Graphics2D) g;
       g2.setFont(font);
       for(int i = 0; i <= numberOfGraphs - 1; i++){
-         String numberOnGraph = Integer.toString(i * 50);
+         String numberOnGraph = Integer.toString(i * 100);
          String numberOnGraphTwo = Integer.toString(i);
          g2.drawString(numberOnGraph, 7, (275 - (i*25)));
          g2.drawString(numberOnGraphTwo, (30 * (i + 1)) , 290);
@@ -110,12 +110,12 @@ class barGraphClass extends Frame{
          try{
             //f.fillRect(graphWidth[k], graphHeight[0], graphWidth[k + 1], graphHeight[1]);
             int kTwo = (Integer)graphWidthArrayList.get(i);
-            f.fillRect(kTwo, graphHeight[0], graphWidthY[0], graphHeight[1]);
+            
+            f.fillRect(kTwo, graphHeight[0], graphWidthY[0], 225);
             //System.out.println(graphWidth[k] + " " + graphHeight[0]+ " " + graphWidth[k + 1]+ " " + graphHeight[1]);
             System.out.println("Filled Rectangle");
             k = k += 2;
             System.out.println(k);
-
          }
          catch(ArrayIndexOutOfBoundsException eswf){System.out.println("loop ends"); break;}
       }
