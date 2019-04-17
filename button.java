@@ -198,80 +198,89 @@ class getterButton extends button implements ActionListener{
                   System.out.println("NOOPTION WORKING");
                }
                if(panelJPane == JOptionPane.CANCEL_OPTION){
-                  //System.out.println(finalWordContainerTwo);
-                  for(int i = 0; i < finalWordContainerTwo.size(); i++){
-                     if(!wordSortingContainer.contains(finalWordContainerTwo.get(i))){
-                        wordSortingContainer.add(finalWordContainerTwo.get(i));
-                     }
-                  }
-                  int sumOfIntegers = 0;
-                  for(int x = 0; x < finalWordContainerTwo.size() ; x++){
-                     try{
-                        int occurences = Collections.frequency(finalWordContainerTwo, wordSortingContainer.get(x));
-                        finalProductNumbers.add(occurences);
-                        //sumOfIntegers += occurences;
-                     }
-                     catch(IndexOutOfBoundsException re){}
-                  }
-                  //System.out.println(wordSortingContainer);
-                  //System.out.println(finalProductNumbers);
-                  try{
-                     System.out.println("-----------------------------------------------");
-                     File file2 = new File("output3.txt");
-                     if(file2.exists()){file2.delete();}
-                     else{System.out.println("File not found");}
-                     BufferedWriter writerTwo = new BufferedWriter(new FileWriter("output3.txt"));
-                     for(int s = 0; s < wordSortingContainer.size() ; s++){
-                        //System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
-                        writerTwo.write(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s) + "\n");
-                     }
-                     //Scanner scannerFileOutput = new Scanner(file2);
-                     //while(scannerFileOutput.hasNextLine()){
-                        //String line = scannerFileOutput.nextLine();
-                        //System.out.println(line);
-                        //String scannerStringOne = scannerFile.nextLine();
-                        //System.out.println(scannerStringOne);
-                        //scannerStringOne = scannerStringOne.replaceAll("[^0-9]+", " ");
-                        //System.out.println(Arrays.asList(scannerStringOne.trim().split(" ")));
-                        //}
-
-                     writerTwo.close();
-                     ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "output3.txt");
-                     pb.start();
-                     //System.out.println("this is the number in sumOfInteger: " + sumOfIntegers);
-                     System.out.println("CANCELOPTION WORKING");
-                  }
-                  catch(IOException ewsde){System.out.println("IOException @new FileWriter(output3.txt)");}
-               }
-               try{
-               try(BufferedReader brReader = new BufferedReader(new FileReader(new File("output3.txt")))){
-                  String line;
-                  ArrayList finalNumbers = new ArrayList();
-                  ArrayList finalNumbersSorted = new ArrayList();
-                  while((line = brReader.readLine()) != null){
-                     String lineChanger = line;
-                     lineChanger = lineChanger.replaceAll("[^0-9]+", " ");
-                     finalNumbers.add(lineChanger);
-                     finalNumbersSorted.add(finalNumbers.get(finalNumbers.size() - 1));
-                     System.out.println(finalNumbers.size() - 1);
-                     finalNumbers.clear();
-                     System.out.println(finalNumbers);
-                  }
-                  brReader.close();
-                  System.out.println(finalNumbersSorted);
-                  System.out.println("brReader closed");
-               }
-               }
-               catch(IOException ewtg3){System.out.println("IOException @brReader");}
+                  cancelOptionMethod();
+               }/////
+               finalNumberSortingMethod();
+               //
                System.out.println("Number of times line with word was found: " + numberStore.size());
                finalWordContainer.clear();
                numberStore.clear();
-            }
+            }/////
          else{System.out.println("Action Not Carried Out");}
 
          }
          else if(booleanChecker.get(0).equals(0)){System.out.println("nothing is selected"); System.out.println(booleanChecker.get(0));}
          }
+         
+      public static void cancelOptionMethod(){
+         //System.out.println(finalWordContainerTwo);
+         for(int i = 0; i < finalWordContainerTwo.size(); i++){
+            if(!wordSortingContainer.contains(finalWordContainerTwo.get(i))){
+               wordSortingContainer.add(finalWordContainerTwo.get(i));
+            }
+         }
+         int sumOfIntegers = 0;
+         for(int x = 0; x < finalWordContainerTwo.size() ; x++){
+            try{
+               int occurences = Collections.frequency(finalWordContainerTwo, wordSortingContainer.get(x));
+               finalProductNumbers.add(occurences);
+               //sumOfIntegers += occurences;
+               }
+            catch(IndexOutOfBoundsException re){}
+         }
+         //System.out.println(wordSortingContainer);
+         //System.out.println(finalProductNumbers);
+         try{
+            System.out.println("-----------------------------------------------");
+            File file2 = new File("output3.txt");
+            if(file2.exists()){file2.delete();}
+            else{System.out.println("File not found");}
+            BufferedWriter writerTwo = new BufferedWriter(new FileWriter("output3.txt"));
+            for(int s = 0; s < wordSortingContainer.size() ; s++){
+               //System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
+               writerTwo.write(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s) + "\n");
+            }
+            writerTwo.close();
+            ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "output3.txt");
+            pb.start();
+            //System.out.println("this is the number in sumOfInteger: " + sumOfIntegers);
+            System.out.println("CANCELOPTION WORKING");
+         }
+         catch(IOException ewsde){System.out.println("IOException @new FileWriter(output3.txt)");}
+      }
+      
+      public static void finalNumberSortingMethod(){
+         try{
+            ArrayList counterInt = new ArrayList();
+            try(BufferedReader brReader = new BufferedReader(new FileReader(new File("output3.txt")))){
+               String line;
+               while((line = brReader.readLine()) != null){
+                  String lineChanger = line;
+                  try{
+                     lineChanger = lineChanger.substring(lineChanger.lastIndexOf("x"));
+                     if(lineChanger.matches(".*\\d.*")){
+                        lineChanger = lineChanger.replaceAll("[^0-9]+", " "); //this was messing with the lineChangerInt parses thus the .trim().
+                        int lineChangerInt = Integer.parseInt(lineChanger.trim());
+                        //System.out.println(lineChangerInt);
+                        finalNumbersSorted.add(lineChangerInt);
+                      }
+                   }
+                  catch(StringIndexOutOfBoundsException | NumberFormatException ews){
+                     System.out.println("StringIndexOutOfBoundsException/NumberFormatException @FinalNumbersSorted format");
+                     //ews.printStackTrace();
+                     }
+                  }
+               int[] ints = {};
+               System.out.println("this is counterInt: " + counterInt);
+               brReader.close();
+               Collections.sort(finalNumbersSorted);
+               Collections.reverse(finalNumbersSorted);
+               System.out.println(finalNumbersSorted);
+               System.out.println("brReader closed");
+               }
+               }
+               catch(IOException ewtg3){System.out.println("IOException @brReader");}
+      }
          
       public static void scannerMethodWebsite(String saleTextFound){
          try{
@@ -284,7 +293,7 @@ class getterButton extends button implements ActionListener{
             testSaleCounter.add(st.indexOf(testSaleTwo));
             //https://www.etsy.com/shop/mrcwoodproducts/sold
             //https://www.etsy.com/shop/mrcwoodproducts/sold?ref=pagination&page=2
-            //https://www.etsy.com/shop/WhoKnowsWhat/sold
+            //https://www.etsy.com/shop/WhoKnowsWhat/sold 
             int subtract = (int)testSaleCounter.get(0) - 1;
             testSaleCounter.set(0,subtract);
             int numberInput;
@@ -681,3 +690,79 @@ class textBoxClear extends button implements ActionListener{
                      //else{numberInput = Integer.parseInt(numberInputString);}
                                           //String stTesting = st.subString(0, st.indexOf("Sold"));
                      //System.out.println(stTesting);
+                     
+                     
+                     
+                     
+                     
+                     
+                                          
+                     
+                     //for(int i = 0; i <= lineChanger.length(); i++){
+                     //   try{
+                     //      char c = lineChanger.charAt(i);
+                     //      if(Character.isDigit(c)){
+                     //        for(int x = 0; x <= 5; x++){
+                     //            if(Character.isDigit(lineChanger.charAt(i + x))){
+                     //               int adderInt = i + x;
+                                    //digitAdder.add(c);
+                      //              digitAdder.add(lineChanger.charAt(adderInt));
+                      //           }
+                      //        }
+                            //System.out.println(digitAdder);
+                      //      digitAdder.clear();
+                      //      }
+                        //else{
+                        //   System.out.println("Digit found");
+                        //   digitCounter.add(c);
+                        //}
+                      //     }  
+                     //   catch(StringIndexOutOfBoundsException e){
+                      //     try{
+                      //        finalNumbersSorted.add(digitCounter.get(digitCounter.size() - 1));
+                       //    }
+                       //    catch(ArrayIndexOutOfBoundsException eTwo){break;}
+                       // }
+                        
+                    // }
+                     //System.out.println(finalNumbersSorted);
+                    // if(lineChanger.matches(".*\\d.*")){
+                      //  counterInt.add(1);
+                     //   int checker = lineChanger.indexOf("*\\d.*");
+                     //   String checkerTwo = lineChanger.substring(checker + 1);
+                        //System.out.println(checker);
+                     //   if(checkerTwo.matches(".*\\d.*")){
+                           //System.out.println("two digits");
+                     //      counterInt.add(1);
+                     //   }
+                     //   else{System.out.println("no number found");}
+                   //  }
+                     
+                    // if(counterInt.size() == 1){
+                     //   lineChanger = lineChanger.replaceAll("[^0-9]+", " ");
+                     //   finalNumbers.add(lineChanger);
+                        //System.out.println(finalNumbers.size() - 1);
+                        //System.out.println(finalNumbers);
+                     //   finalNumbersSorted.add(finalNumbers.get(finalNumbers.size() - 1));
+                     //   finalNumbers.clear();
+                        //System.out.println(finalNumbers);
+                     //   counterInt.clear();
+                    // }
+                    // else{
+                        //System.out.println("two digits");
+                     //   counterInt.clear();
+                    // }
+                    
+                                               //new line changer here; not making a new instance
+                           //Collections.sort is sorting by the first number if every integer due
+                           //to the way it is added; lineChanger.replaceAll();
+                           //it most likely too could be due to finalNumbersSorted not being an integer Array
+                           //Scanner scannerFileOutput = new Scanner(file2);
+                     //while(scannerFileOutput.hasNextLine()){
+                        //String line = scannerFileOutput.nextLine();
+                        //System.out.println(line);
+                        //String scannerStringOne = scannerFile.nextLine();
+                        //System.out.println(scannerStringOne);
+                        //scannerStringOne = scannerStringOne.replaceAll("[^0-9]+", " ");
+                        //System.out.println(Arrays.asList(scannerStringOne.trim().split(" ")));
+                        //}

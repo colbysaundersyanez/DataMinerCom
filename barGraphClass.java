@@ -73,7 +73,8 @@ class barGraphClass extends Frame{
             System.out.println("closing");
             System.exit(0);
          }        
-      }); 
+      });
+   barGraphExtender.barGraphExtenderTwo.numberCheck(); 
    }
    public void paint(Graphics g) {
       Graphics2D gLine = (Graphics2D) g;
@@ -106,18 +107,35 @@ class barGraphClass extends Frame{
       }
       catch(ArrayIndexOutOfBoundsException erqfq){System.out.println("ends");}
       int k = 0;
-      for(int i = 0; i < numberOfGraphs; i++){
+//       for(int i = 0; i < numberOfGraphs; i++){
+//          try{
+//             //f.fillRect(graphWidth[k], graphHeight[0], graphWidth[k + 1], graphHeight[1]);
+//             int kTwo = (Integer)graphWidthArrayList.get(i);
+//             
+//             f.fillRect(kTwo, graphHeight[0], graphWidthY[0], 225);
+//             //System.out.println(graphWidth[k] + " " + graphHeight[0]+ " " + graphWidth[k + 1]+ " " + graphHeight[1]);
+//              System.out.println("Filled Rectangle");
+//              k = k += 2;
+//              System.out.println(k);
+//           }
+//           catch(ArrayIndexOutOfBoundsException eswf){System.out.println("loop ends"); break;}
+//        }
+      //for //insert code to make graphs a certain height compared to numbers in storage.
+      for(int i = 0; i <= 28; i++){
          try{
-            //f.fillRect(graphWidth[k], graphHeight[0], graphWidth[k + 1], graphHeight[1]);
             int kTwo = (Integer)graphWidthArrayList.get(i);
-            
-            f.fillRect(kTwo, graphHeight[0], graphWidthY[0], 225);
-            //System.out.println(graphWidth[k] + " " + graphHeight[0]+ " " + graphWidth[k + 1]+ " " + graphHeight[1]);
-            System.out.println("Filled Rectangle");
-            k = k += 2;
-            System.out.println(k);
+            f.fillRect(kTwo, graphHeight[i], graphWidthY[0], 225);
          }
          catch(ArrayIndexOutOfBoundsException eswf){System.out.println("loop ends"); break;}
+      }
+   }
+   
+   public static class barGraphExtender extends getterButton{
+      public static class barGraphExtenderTwo extends extenderClass{
+         public static void numberCheck(){
+            getterButton.extenderClass.cancelOptionMethod();
+            getterButton.extenderClass.finalNumberSortingMethod();
+         }
       }
    }
 }
