@@ -239,7 +239,9 @@ class getterButton extends button implements ActionListener{
             for(int s = 0; s < wordSortingContainer.size() ; s++){
                //System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
                writerTwo.write(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s) + "\n");
+               wordSorting.add(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
             }
+            wordSorter();
             writerTwo.close();
             ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "output3.txt");
             pb.start();
@@ -280,6 +282,32 @@ class getterButton extends button implements ActionListener{
                }
                }
                catch(IOException ewtg3){System.out.println("IOException @brReader");}
+      }
+      
+      public static void wordSorter(){
+         //System.out.println(wordSorting); //remove everythingbut "x #" then find the index and put both words from list into new list
+         System.out.println("this is wordSorting" + wordSorting);
+         for(int i = 0; i <= wordSorting.size() - 1; i++){
+            String word = wordSorting.get(i).toString();
+            word = word.substring(word.lastIndexOf("x") + 1);
+            //word = word.replaceAll("[^0-9]+", " ");
+            int wordInt = Integer.parseInt(word.trim());
+            wordSortingTwo.add(wordInt);
+         }
+         System.out.println(wordSortingTwo);
+         for(int x = 0; x <= wordSortingTwo.size() - 1; x++){wordSortingThree.add(wordSortingTwo.get(x));}
+         Collections.sort(wordSortingThree);
+         Collections.reverse(wordSortingThree);
+         for(int iTwo = 0; iTwo <= wordSortingThree.size() - 1; iTwo++){
+            String wordSorted = wordSortingThree.get(iTwo).toString();
+            wordSorted = "x " + wordSorted;
+            wordSortingFour.add(wordSorted);
+         }
+         int indexTester = wordSorting.lastIndexOf(wordSortingFour.get(3));
+         System.out.println(indexTester);
+         //System.out.println(finalNumbersSorted.get(indexTester));
+         System.out.println(wordSortingFour);
+         //System.out.println("WordSortingThree: " + wordSortingThree);
       }
          
       public static void scannerMethodWebsite(String saleTextFound){

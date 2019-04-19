@@ -55,8 +55,9 @@ class barGraphClass extends Frame{
    public int height;
    public int width;
    public int numberOfGraphs = 28;
+   public static ArrayList<Integer> numberHolder = new ArrayList<Integer>();
    public static Color backGroundWhite = new Color(250, 249, 250);
-   public int[] graphHeight = {50}; //first one only allowed to change within the range of 25 - 225
+   public ArrayList<Integer> graphHeight = new ArrayList<Integer>(); //first one only allowed to change within the range of 25 - 225
    //public int[] graphWidth = {30,15, 60,15, 90,15, 120, 15, 150,15, 180,15, 210, 15, 240, 15};
    ArrayList graphWidthArrayList = new ArrayList();
    public int[] graphWidth = {};
@@ -99,10 +100,10 @@ class barGraphClass extends Frame{
       try{
          for(int x = 1; x <= numberOfGraphs; x++){
             graphWidthArrayList.add(30 * x);
-            System.out.println(graphWidthArrayList);
+            //System.out.println(graphWidthArrayList);
             //graphWidth[x] = 30 * x;     
-            System.out.println(Arrays.toString(graphWidth));
-            System.out.println(x);    
+            //System.out.println(Arrays.toString(graphWidth));
+            //System.out.println(x);    
          }
       }
       catch(ArrayIndexOutOfBoundsException erqfq){System.out.println("ends");}
@@ -120,11 +121,16 @@ class barGraphClass extends Frame{
 //           }
 //           catch(ArrayIndexOutOfBoundsException eswf){System.out.println("loop ends"); break;}
 //        }
-      //for //insert code to make graphs a certain height compared to numbers in storage.
-      for(int i = 0; i <= 28; i++){
+      for(int x = 0; x <= 28; x++){
+         long longNumber = Math.round(((numberHolder.get(x) * -1) * .27));
+         int intNumber = (int)longNumber;
+         System.out.println(intNumber);
+         graphHeight.add(intNumber);
+      } 
+      for(int i = 0; i <= 27; i++){
          try{
             int kTwo = (Integer)graphWidthArrayList.get(i);
-            f.fillRect(kTwo, graphHeight[i], graphWidthY[0], 225);
+            f.fillRect(kTwo, 270, graphWidthY[0], graphHeight.get(i));
          }
          catch(ArrayIndexOutOfBoundsException eswf){System.out.println("loop ends"); break;}
       }
@@ -133,8 +139,15 @@ class barGraphClass extends Frame{
    public static class barGraphExtender extends getterButton{
       public static class barGraphExtenderTwo extends extenderClass{
          public static void numberCheck(){
-            getterButton.extenderClass.cancelOptionMethod();
-            getterButton.extenderClass.finalNumberSortingMethod();
+            getterButton newGetter = new getterButton();
+            if(finalNumbersSorted.size() == 0){
+               extenderClass.cancelOptionMethod();
+               extenderClass.finalNumberSortingMethod();
+            }
+            System.out.println("this is finalNumbersSorted" + finalNumbersSorted);
+            for(int i = 0; i <= 28; i++){
+               numberHolder.add(finalNumbersSorted.get(i));
+            }
          }
       }
    }

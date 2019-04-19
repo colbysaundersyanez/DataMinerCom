@@ -102,11 +102,14 @@ class mainWindow extends Frame{
    public static ArrayList<String> finalWordContainerTwo = new ArrayList<String>();
    
    public static ArrayList finalNumbers = new ArrayList();
-   //public static ArrayList finalNumbersSorted = new ArrayList();
    public static ArrayList<Integer> finalNumbersSorted = new ArrayList<Integer>();
    public static ArrayList digitCounter = new ArrayList();
    public static ArrayList digitAdder = new ArrayList();
    public static ArrayList finalProductNumbers = new ArrayList();
+   public static ArrayList wordSorting = new ArrayList();
+   public static ArrayList wordSortingTwo = new ArrayList();
+   public static ArrayList wordSortingThree = new ArrayList();
+   public static ArrayList wordSortingFour = new ArrayList();
    public mainWindow(){
       super("DataMiner");
       setSize(300,300);
