@@ -238,10 +238,16 @@ class getterButton extends button implements ActionListener{
             BufferedWriter writerTwo = new BufferedWriter(new FileWriter("output3.txt"));
             for(int s = 0; s < wordSortingContainer.size() ; s++){
                //System.out.println("Item: " + wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
-               writerTwo.write(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s) + "\n");
+               //writerTwo.write(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s) + "\n");
                wordSorting.add(wordSortingContainer.get(s) + " x " + finalProductNumbers.get(s));
             }
             wordSorter();
+            Collections.sort(wordSortingTwo);
+            Collections.reverse(wordSortingTwo);
+            for(int e = 0; e < wordSortingContainer.size(); e++){
+               int eTwo = numberKeeper.get(e);
+               writerTwo.write(wordSortingContainer.get(eTwo) + " x " + wordSortingTwo.get(e) + "\n");
+            }
             writerTwo.close();
             ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "output3.txt");
             pb.start();
@@ -294,7 +300,7 @@ class getterButton extends button implements ActionListener{
             int wordInt = Integer.parseInt(word.trim());
             wordSortingTwo.add(wordInt);
          }
-         System.out.println(wordSortingTwo);
+         System.out.println("this is wordSortingTwo" + wordSortingTwo);
          for(int x = 0; x <= wordSortingTwo.size() - 1; x++){wordSortingThree.add(wordSortingTwo.get(x));}
          Collections.sort(wordSortingThree);
          Collections.reverse(wordSortingThree);
@@ -303,8 +309,19 @@ class getterButton extends button implements ActionListener{
             wordSorted = "x " + wordSorted;
             wordSortingFour.add(wordSorted);
          }
-         int indexTester = wordSorting.lastIndexOf(wordSortingFour.get(3));
-         System.out.println(indexTester);
+         for(int xTwo = 0; xTwo <= wordSorting.size() - 1; xTwo++){
+            String wordIndexer = wordSortingFour.get(xTwo).toString();
+            for(int p = 0; p <= wordSortingFour.size() - 1; p++){
+               String wordIndexerTwo = wordSorting.get(p).toString();
+               if(wordIndexerTwo.contains(wordIndexer)){
+                  numberKeeper.add(p);
+               }
+            } 
+         }
+         System.out.println("this is numberKeeper" + numberKeeper);
+         for(int iThree = 0; iThree <= wordSorting.size() - 1; iThree++){
+            
+         }
          //System.out.println(finalNumbersSorted.get(indexTester));
          System.out.println(wordSortingFour);
          //System.out.println("WordSortingThree: " + wordSortingThree);

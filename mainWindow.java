@@ -110,6 +110,8 @@ class mainWindow extends Frame{
    public static ArrayList wordSortingTwo = new ArrayList();
    public static ArrayList wordSortingThree = new ArrayList();
    public static ArrayList wordSortingFour = new ArrayList();
+   
+   public static ArrayList<Integer> numberKeeper = new ArrayList<Integer>();
    public mainWindow(){
       super("DataMiner");
       setSize(300,300);
