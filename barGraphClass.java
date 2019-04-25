@@ -48,8 +48,14 @@ import java.awt.Label;
 import java.awt.Menu;
 import java.awt.Insets;
 import java.net.*;
+import java.awt.Dimension;
+import javax.swing.*;
 
 class barGraphClass extends Frame{
+   public  JScrollPane scrollPane;
+   public JTextArea console;
+   public JPanel scrollFrame = new JPanel();
+   
    Font font = new Font("Serif" , Font.BOLD, 9);
    public static Color redColor = new Color(255,0,0);
    public int height;
@@ -57,6 +63,7 @@ class barGraphClass extends Frame{
    public int numberOfGraphs = 28;
    public static ArrayList<Integer> numberHolder = new ArrayList<Integer>();
    public static Color backGroundWhite = new Color(250, 249, 250);
+   public static Color blackColor = new Color(0,0,0);
    public ArrayList<Integer> graphHeight = new ArrayList<Integer>(); //first one only allowed to change within the range of 25 - 225
    //public int[] graphWidth = {30,15, 60,15, 90,15, 120, 15, 150,15, 180,15, 210, 15, 240, 15};
    ArrayList graphWidthArrayList = new ArrayList();
@@ -71,12 +78,38 @@ class barGraphClass extends Frame{
       //setLayout(null);
       addWindowListener(new WindowAdapter() {
          public void windowClosing(WindowEvent windowEvent){
+            try{
+               Runtime p = Runtime.getRuntime();
+               p.exec("taskKill /F /IM notepad.exe");
+            }
+            catch(IOException e){System.out.println("IOException @Runtime p in barGraphClass window");}
             System.out.println("closing");
             System.exit(0);
          }        
       });
+   //scrollFrame.setSize(30,300);
+   //add(scrollFrame);
+   //scrollFrame.setBounds(50,50,50,50);
+   //scrollFrame.setBackground(blackColor);
+   //scrollFrame.setVisible(true);
+   //console = new JTextArea(1, 1);
+   //scrollPane = new JScrollPane(console);
+   //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+   //scrollPane.setVisible(true);
+   //add(scrollPane);
+   addScrollPane();
    barGraphExtender.barGraphExtenderTwo.numberCheck(); 
+   //add(new ScrolledPane());
+   
    }
+   
+   //public class ScrolledPane extends JPanel{
+   //   public ScrolledPane(){
+   //      setPreferredSize(new Dimension(200,250));
+         
+   //   }
+   //}
+   
    public void paint(Graphics g) {
       Graphics2D gLine = (Graphics2D) g;
       gLine.drawLine(25,25, 25, 275);
@@ -88,43 +121,26 @@ class barGraphClass extends Frame{
       for(int i = 0; i <= numberOfGraphs - 1; i++){
          String numberOnGraph = Integer.toString(i * 100);
          String numberOnGraphTwo = Integer.toString(i);
-         g2.drawString(numberOnGraph, 7, (275 - (i*25)));
+         int numberOnGraphInt = Integer.parseInt(numberOnGraph);
+         if(numberOnGraphInt != 900){
+            g2.drawString(numberOnGraph, 4, (275 - (i*25)));
+         }
+         else{g2.drawString("900+", 4, (275 - (i*25)));}
          g2.drawString(numberOnGraphTwo, (30 * (i + 1)) , 290);
       }
-      //g2.drawString("1", 15,275);
-      //g2.setColor(Color.black);
-      //g2.setFont(font);
-      //g2.drawString("Author: Colby S. Yanez", 15, 285);
       Graphics2D f = (Graphics2D) g;
       f.setColor(redColor);
       try{
          for(int x = 1; x <= numberOfGraphs; x++){
-            graphWidthArrayList.add(30 * x);
-            //System.out.println(graphWidthArrayList);
-            //graphWidth[x] = 30 * x;     
-            //System.out.println(Arrays.toString(graphWidth));
-            //System.out.println(x);    
+            graphWidthArrayList.add(30 * x);   
          }
       }
       catch(ArrayIndexOutOfBoundsException erqfq){System.out.println("ends");}
       int k = 0;
-//       for(int i = 0; i < numberOfGraphs; i++){
-//          try{
-//             //f.fillRect(graphWidth[k], graphHeight[0], graphWidth[k + 1], graphHeight[1]);
-//             int kTwo = (Integer)graphWidthArrayList.get(i);
-//             
-//             f.fillRect(kTwo, graphHeight[0], graphWidthY[0], 225);
-//             //System.out.println(graphWidth[k] + " " + graphHeight[0]+ " " + graphWidth[k + 1]+ " " + graphHeight[1]);
-//              System.out.println("Filled Rectangle");
-//              k = k += 2;
-//              System.out.println(k);
-//           }
-//           catch(ArrayIndexOutOfBoundsException eswf){System.out.println("loop ends"); break;}
-//        }
       for(int x = 0; x <= 28; x++){
          long longNumber = Math.round(((numberHolder.get(x) * -1) * .27));
          int intNumber = (int)longNumber;
-         System.out.println(intNumber);
+         //System.out.println(intNumber);
          graphHeight.add(intNumber);
       } 
       for(int i = 0; i <= 27; i++){
@@ -134,6 +150,15 @@ class barGraphClass extends Frame{
          }
          catch(ArrayIndexOutOfBoundsException eswf){System.out.println("loop ends"); break;}
       }
+   }
+   
+   public void addScrollPane(){
+      scrollFrame.setSize(30,300);
+      add(scrollFrame);
+      scrollFrame.setBounds(875,0,20,300);
+      scrollFrame.setBackground(blackColor);
+      scrollFrame.setVisible(true);
+      System.out.println("ScrollPane Added");
    }
    
    public static class barGraphExtender extends getterButton{

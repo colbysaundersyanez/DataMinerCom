@@ -124,7 +124,19 @@ class mainWindow extends Frame{
       add(x);
       addWindowListener(new WindowAdapter() {
          public void windowClosing(WindowEvent windowEvent){
-            System.out.println("closing");
+            try{
+            Runtime p = Runtime.getRuntime();
+            p.exec("taskKill /F /IM notepad.exe");
+            }
+            catch(IOException e){System.out.println("IOException @ProcessBuilder in mainWindowo");}
+            // try{
+//                ProcessBuilder processBuilder = new ProcessBuilder("tasklist.exe");
+//                Process process = processBuilder.start();
+//                String tasksList = process.getInputStream().toString();
+//                System.out.println(tasksList);
+//             }
+//             catch(IOException e){System.out.println("IOException @ProcessBuilder in mainWindowo");}
+            System.out.println("closing down main");
             System.exit(0);
          }        
       }); 
