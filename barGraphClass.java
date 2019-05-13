@@ -55,6 +55,7 @@ class barGraphClass extends Frame{
    public  JScrollPane scrollPane;
    public JTextArea console;
    public JPanel scrollFrame = new JPanel();
+   public ScrollPane SC = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
    
    Font font = new Font("Serif" , Font.BOLD, 9);
    public static Color redColor = new Color(255,0,0);
@@ -96,8 +97,11 @@ class barGraphClass extends Frame{
    //scrollPane = new JScrollPane(console);
    //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
    //scrollPane.setVisible(true);
-   //add(scrollPane);
-   addScrollPane();
+   
+   //Rectangle rect = new Rectangle(200, 200);
+   //SC.add(new ScrollPane());
+   //SC.setContent(rect);
+   //add(SC);
    barGraphExtender.barGraphExtenderTwo.numberCheck(); 
    //add(new ScrolledPane());
    
@@ -110,7 +114,9 @@ class barGraphClass extends Frame{
    //   }
    //}
    
+   
    public void paint(Graphics g) {
+   
       Graphics2D gLine = (Graphics2D) g;
       gLine.drawLine(25,25, 25, 275);
       gLine.drawLine(25,275,875,275);

@@ -61,6 +61,14 @@ import java.util.Set;
 //https://stackoverflow.com/questions/19035893/finding-second-occurrence-of-a-substring-in-a-string-in-java/35155037
 //https://stackoverflow.com/questions/2793150/how-to-use-java-net-urlconnection-to-fire-and-handle-http-requests?rq=1
 
+class barGraphThread extends getterButton implements Runnable{
+   public void run(){
+      synchronized(this){
+         extenderClass.barGraphCreator();
+      }
+   }
+}
+
 class button implements ActionListener{
    
    public JPanel buttonCreator(JPanel f, int a, int b, int c, int d, String name){
@@ -193,24 +201,29 @@ class getterButton extends button implements ActionListener{
                   catch(IOException eswe){System.out.println("IOException @BooleanChecker 7");}
                }
                if(panelJPane == JOptionPane.NO_OPTION){
-                  int[] classNumbers = {900,300};
-                  barGraphClass finalProductsGraph = new barGraphClass(classNumbers[0],classNumbers[1]);
-                  System.out.println("NOOPTION WORKING");
+                  //Thread barGraphOne = new Thread(new barGraphThread());
+                  //barGraphOne.start();
+                  barGraphCreator();
                }
                if(panelJPane == JOptionPane.CANCEL_OPTION){
                   cancelOptionMethod();
-               }/////
+               }
                finalNumberSortingMethod();
-               //
                System.out.println("Number of times line with word was found: " + numberStore.size());
                finalWordContainer.clear();
                numberStore.clear();
-            }/////
+            }
          else{System.out.println("Action Not Carried Out");}
 
          }
          else if(booleanChecker.get(0).equals(0)){System.out.println("nothing is selected"); System.out.println(booleanChecker.get(0));}
          }
+      
+      public static void barGraphCreator(){
+           int[] classNumbers = {900,300};
+           barGraphClass finalProductsGraph = new barGraphClass(classNumbers[0],classNumbers[1]);
+           System.out.println("NOOPTION WORKING");
+      }
          
       public static void cancelOptionMethod(){
          //System.out.println(finalWordContainerTwo);

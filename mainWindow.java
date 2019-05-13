@@ -169,7 +169,7 @@ class mainWindow extends Frame{
    }
    
    public static void main(String[] args){
-      mainWindow window = new mainWindow();
+      //mainWindow window = new mainWindow(); //this is old window, current window is accessoryLayoutClass.mainMethod();
       if(Desktop.isDesktopSupported()){System.out.println("desktop is supported");}
       else{System.out.println("Desktop is not supported");}
       accessoryLayoutClass.mainMethod();
@@ -178,22 +178,31 @@ class mainWindow extends Frame{
 
 class accessoryLayoutClass extends mainWindow{
    public static void mainMethod(){
-      closeButton b = new closeButton();
-      b.buttonCreator(x,215,230,65,25,"Close");
-      URLUser checkOne = new URLUser();
-      checkOne.checkBoxCreator(x,"URL link",180,10,70,20);
-      getterButton b2 = new getterButton();
-      b2.buttonCreator(x,145,230,65,25,"Find Data");
-      showBox.textBoxCreator(x,160,187,120,25);
-      fileChooser fileChecker = new fileChooser();
-      fileChecker.checkBoxCreator(x,"File Select",180,30,90,20);
-      socialMedia socialMediaCheck = new socialMedia();
-      socialMediaCheck.checkBoxCreator(x,"Social Media", 180,50,90,20);
-      randomSearch randomSearchCheck = new randomSearch();
-      randomSearchCheck.checkBoxCreator(x,"Rand Search" , 180,70,100,20);
-      saleFinder saleFinderCheck = new saleFinder();
-      saleFinderCheck.checkBoxCreator(x,"Sale Finder" , 180,90,100,20);
-      sortingData sortingDataCheck = new sortingData();
-      sortingDataCheck.checkBoxCreator(x,"Sorting" , 180,110,100,20);
+      Thread graphicsThread = new Thread(new multiThreadLayout());
+      graphicsThread.start();
+   }
+}
+
+class multiThreadLayout extends mainWindow implements Runnable{
+   public void run(){
+      synchronized(this){
+         closeButton b = new closeButton();
+         b.buttonCreator(x,215,230,65,25,"Close");
+         URLUser checkOne = new URLUser();
+         checkOne.checkBoxCreator(x,"URL link",180,10,70,20);
+         getterButton b2 = new getterButton();
+         b2.buttonCreator(x,145,230,65,25,"Find Data");
+         showBox.textBoxCreator(x,160,187,120,25);
+         fileChooser fileChecker = new fileChooser();
+         fileChecker.checkBoxCreator(x,"File Select",180,30,90,20);
+         socialMedia socialMediaCheck = new socialMedia();
+         socialMediaCheck.checkBoxCreator(x,"Social Media", 180,50,90,20);
+         randomSearch randomSearchCheck = new randomSearch();
+         randomSearchCheck.checkBoxCreator(x,"Rand Search" , 180,70,100,20);
+         saleFinder saleFinderCheck = new saleFinder();
+         saleFinderCheck.checkBoxCreator(x,"Sale Finder" , 180,90,100,20);
+         sortingData sortingDataCheck = new sortingData();
+         sortingDataCheck.checkBoxCreator(x,"Sorting" , 180,110,100,20);
+      }
    }
 }

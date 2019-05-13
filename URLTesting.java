@@ -54,6 +54,14 @@ import java.util.Map;
 //https://stackoverflow.com/questions/23045956/icons-on-joptionpane
 //https://crunchify.com/simple-way-to-get-http-response-header-in-java/
 
+class multiThreading implements Runnable{
+   public void run(){
+      synchronized(this){
+      
+      }
+   }
+}
+
 class URLTesting extends mainWindow{
    public static Color backGroundWhite = new Color(250, 249, 250);
    public static Font font = new Font("Serif" , Font.BOLD, 10);
@@ -95,19 +103,19 @@ class URLTesting extends mainWindow{
          Document documentTwo = Jsoup.connect(URL).maxBodySize(0).get();
          
          
-         //URL obj = new URL(URL);
-         //URLConnection  connection = obj.openConnection();
+         URL obj = new URL(URL);
+         URLConnection  connection = obj.openConnection();
          
-         //System.out.println();
-         //System.out.println("--------------------------------------");
-         //System.out.println();
-         //Map<String, List<String>> map = connection.getHeaderFields();
-         //   for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-			//	System.out.println(entry.getKey() + " : " + entry.getValue());
-			//}
-         //System.out.println();
-         //System.out.println("--------------------------------------");
-         //System.out.println();
+         System.out.println();
+         System.out.println("--------------------------------------");
+         System.out.println();
+         Map<String, List<String>> map = connection.getHeaderFields();
+            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+				System.out.println(entry.getKey() + " : " + entry.getValue());
+			}
+         System.out.println();
+         System.out.println("--------------------------------------");
+         System.out.println();
          elementGetter(documentTwo);
          PrintStream fileStream = new PrintStream(new File("output.txt"));
          for(int i = 0; i<=containerStrings.size() - 1;i++){
